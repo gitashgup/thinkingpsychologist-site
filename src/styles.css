@@ -390,6 +390,10 @@ h3 {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
+.product-card.expanded {
+  overflow: hidden;
+}
+
 .product-card.archived {
   opacity: 0.82;
 }
@@ -408,6 +412,10 @@ h3 {
   gap: 0.9rem;
   align-items: center;
   padding: 0.8rem;
+}
+
+.product-card.expanded .product-card-row {
+  border-bottom: 1px solid var(--line);
 }
 
 .product-card-body-row {
@@ -608,9 +616,12 @@ h3 {
 }
 
 .detail-panel-inline {
-  margin-top: 0.15rem;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
+  margin-top: -1px;
+  padding: 0.85rem 0.8rem 0.9rem;
+  border: 0;
+  border-radius: 0 0 28px 28px;
+  box-shadow: none;
+  background: transparent;
 }
 
 .detail-image-wrap {
@@ -695,6 +706,7 @@ h3 {
 
 .detail-actions-inline {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.15rem;
 }
 
 .detail-action-button {

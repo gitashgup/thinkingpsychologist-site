@@ -546,7 +546,7 @@ function ProductCard({
   const stockTone = product.quantity <= 0 ? "danger" : product.quantity <= 5 ? "warn" : "ok";
 
   return (
-    <article className={`product-card ${product.archivedAt ? "archived" : ""}`}>
+    <article className={`product-card ${product.archivedAt ? "archived" : ""} ${expanded ? "expanded" : ""}`}>
       <div className="product-card-row" onClick={() => onSelect(product)}>
         <ProductThumb product={product} />
         <div className="product-card-body product-card-body-row">
@@ -712,7 +712,6 @@ function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImag
       </div>
       <div className="section-head">
         <div>
-          <p className="eyebrow">Selected Product</p>
           <h3>{product.name}</h3>
         </div>
         <span className={`stock-pill ${product.stockStatus !== "In stock" ? "warn" : ""}`}>{product.stockStatus}</span>
@@ -759,10 +758,10 @@ function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImag
             ) : null}
           </div>
           {product.notes ? <p className="detail-note">{product.notes}</p> : null}
-          {canManage && !customerMode ? (
+            {canManage && !customerMode ? (
             <div className="detail-actions detail-actions-inline">
               <button type="button" className="ghost-button detail-action-button" onClick={() => setEditing(true)}>
-                Edit
+                Edit Product
               </button>
               <button type="button" className="primary-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
                 <ShareIcon />
