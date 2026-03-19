@@ -863,6 +863,7 @@ function CatalogSection({
   onInlineEdit,
   onInlineImageReplace,
   imageBusy,
+  saveBusy,
   search,
   setSearch,
   categoryFilter,
