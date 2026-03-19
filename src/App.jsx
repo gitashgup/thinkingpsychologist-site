@@ -279,6 +279,23 @@ function StatusStrip({ statusMessage, items = [] }) {
   );
 }
 
+function StatStrip({ items }) {
+  if (!items.length) {
+    return null;
+  }
+
+  return (
+    <section className="stat-strip" aria-label="Inventory highlights">
+      {items.map((item) => (
+        <article key={item.label} className={item.emphasis ? "stat-chip emphasis" : "stat-chip"}>
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+        </article>
+      ))}
+    </section>
+  );
+}
+
 function ControlBar({ search, setSearch, categoryFilter, setCategoryFilter, categories }) {
   return (
     <section className="panel-card control-bar">
@@ -1041,7 +1058,7 @@ export default function App() {
   const statsItems = [
     { label: "Products", value: stats.totalProducts },
     { label: "Units", value: stats.totalUnits },
-    { label: "Low stock", value: stats.lowStock },
+    { label: "Low stock", value: stats.lowStock, emphasis: stats.lowStock > 0 },
     { label: "With photos", value: stats.withImages }
   ];
 
@@ -1139,7 +1156,8 @@ export default function App() {
 
         {activeTab === "products" ? (
           <>
-            <StatusStrip statusMessage={statusMessage} items={statsItems} />
+            <StatusStrip statusMessage={statusMessage} />
+            <StatStrip items={statsItems} />
             <CatalogSection
               products={filteredProducts}
               customerMode={false}
