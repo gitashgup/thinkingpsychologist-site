@@ -4,6 +4,7 @@ import { isSupabaseConfigured, supabase } from "./lib/supabase";
 
 const brandLogo = "/assets/brand/decorbeats-logo.svg";
 const WHATSAPP_NUMBER = "919XXXXXXXXX";
+const PRODUCT_STORAGE_BUCKET = "products";
 
 const emptyForm = {
   id: "",
@@ -101,6 +102,22 @@ function normalizeImageUrls(value) {
     return normalized ? [normalized] : [];
   }
   return [];
+}
+
+function sanitizeStorageSegment(value, fallback = "draft") {
+  const cleaned = safeText(value)
+    .replace(/[^a-zA-Z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return cleaned || fallback;
+}
+
+function getFileExtension(fileName) {
+  const extension = safeText(fileName).split(".").pop()?.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  return extension || "jpg";
+}
+
+function buildProductImagePath(sku, fileName) {
+  return `${sanitizeStorageSegment(sku)}/${Date.now()}.${getFileExtension(fileName)}`;
 }
 
 function getProductImages(product) {
@@ -738,7 +755,7 @@ function CustomerFooter({ onAdmin, showAdminLink = true }) {
   );
 }
 
-function ProductMediaManager({ product, busy, onAddImages, onDeleteImage, onSetCoverImage }) {
+function ProductMediaManager({ product, busy, errorMessage, onAddImages, onDeleteImage, onSetCoverImage }) {
   const fileInputRef = useRef(null);
   const images = getProductImages(product);
 
@@ -793,6 +810,7 @@ function ProductMediaManager({ product, busy, onAddImages, onDeleteImage, onSetC
           event.target.value = "";
         }}
       />
+      {errorMessage ? <p className="inline-upload-error">{errorMessage}</p> : null}
     </div>
   );
 }
@@ -990,6 +1008,7 @@ function ProductCard({
   onInlineDeleteImage,
   onInlineSetCoverImage,
   imageBusy,
+  uploadError,
   saveBusy,
   archivedVisible = false
 }) {
@@ -1081,6 +1100,7 @@ function ProductCard({
           onDeleteImage={onInlineDeleteImage}
           onSetCoverImage={onInlineSetCoverImage}
           imageBusy={imageBusy}
+          uploadError={uploadError}
           saveBusy={saveBusy}
           inline
         />
@@ -1099,6 +1119,7 @@ function DetailPanel({
   onDeleteImage,
   onSetCoverImage,
   imageBusy,
+  uploadError,
   saveBusy,
   inline = false
 }) {
@@ -1145,6 +1166,7 @@ function DetailPanel({
             <ProductMediaManager
               product={product}
               busy={imageBusy}
+              errorMessage={uploadError}
               onAddImages={onAddImages}
               onDeleteImage={onDeleteImage}
               onSetCoverImage={onSetCoverImage}
@@ -1293,6 +1315,7 @@ function CatalogSection({
   onInlineDeleteImage,
   onInlineSetCoverImage,
   imageBusy,
+  uploadError,
   saveBusy,
   search,
   setSearch,
@@ -1329,6 +1352,7 @@ function CatalogSection({
                 onInlineDeleteImage={onInlineDeleteImage}
                 onInlineSetCoverImage={onInlineSetCoverImage}
                 imageBusy={imageBusy}
+                uploadError={uploadError}
                 saveBusy={saveBusy}
                 archivedVisible={archivedVisible}
               />
@@ -1412,6 +1436,7 @@ export default function App() {
   const [form, setForm] = useState(emptyForm);
   const [saveBusy, setSaveBusy] = useState(false);
   const [uploadBusy, setUploadBusy] = useState(false);
+  const [uploadError, setUploadError] = useState("");
   const [importBusy, setImportBusy] = useState(false);
   const [authBusy, setAuthBusy] = useState(false);
   const [archiveBusy, setArchiveBusy] = useState(false);
@@ -1489,6 +1514,10 @@ export default function App() {
       setActiveTab("products");
     }
   }, [adminActive]);
+
+  useEffect(() => {
+    setUploadError("");
+  }, [selectedId]);
 
   useEffect(() => {
     if (!adminActive) {
@@ -1716,17 +1745,17 @@ export default function App() {
     }
 
     setUploadBusy(true);
+    setUploadError("");
     try {
       if (isSupabaseConfigured) {
         const uploadedUrls = [];
         for (const file of files) {
-          const extension = file.name.split(".").pop();
-          const path = `products/${product.sku}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${extension}`;
-          const { error: uploadError } = await supabase.storage.from("product-images").upload(path, file, { upsert: false });
-          if (uploadError) {
-            throw uploadError;
+          const path = buildProductImagePath(product.sku, file.name);
+          const { error: storageError } = await supabase.storage.from(PRODUCT_STORAGE_BUCKET).upload(path, file, { upsert: false });
+          if (storageError) {
+            throw storageError;
           }
-          const { data: publicUrlData } = supabase.storage.from("product-images").getPublicUrl(path);
+          const { data: publicUrlData } = supabase.storage.from(PRODUCT_STORAGE_BUCKET).getPublicUrl(path);
           uploadedUrls.push(publicUrlData.publicUrl);
         }
         await persistProductImages(product, [...getProductImages(product), ...uploadedUrls]);
@@ -1737,7 +1766,10 @@ export default function App() {
         setStatusMessage(localUrls.length === 1 ? "Image added locally." : `${localUrls.length} images added locally.`);
       }
     } catch (error) {
-      setStatusMessage(error.message || "Could not update this gallery.");
+      console.log("Supabase upload failed:", error);
+      const message = error?.message || "Could not update this gallery.";
+      setUploadError(`Upload failed: ${message}`);
+      setStatusMessage(`Upload failed: ${message}`);
     } finally {
       setUploadBusy(false);
     }
@@ -1750,6 +1782,7 @@ export default function App() {
 
     const nextImages = getProductImages(product).filter((url) => url !== imageUrlToRemove);
     setUploadBusy(true);
+    setUploadError("");
     try {
       await persistProductImages(product, nextImages);
       setStatusMessage("Image removed from gallery.");
@@ -1768,6 +1801,7 @@ export default function App() {
     const images = getProductImages(product);
     const nextImages = [imageUrlToPromote, ...images.filter((url) => url !== imageUrlToPromote)];
     setUploadBusy(true);
+    setUploadError("");
     try {
       await persistProductImages(product, nextImages);
       setStatusMessage("Cover image updated.");
@@ -1896,19 +1930,22 @@ export default function App() {
     }
 
     setUploadBusy(true);
+    setUploadError("");
     try {
-      const extension = file.name.split(".").pop();
-      const path = `${form.sku || "draft"}/${Date.now()}.${extension}`;
-      const { error: uploadError } = await supabase.storage.from("product-images").upload(path, file, { upsert: true });
-      if (uploadError) {
-        throw uploadError;
+      const path = buildProductImagePath(form.sku || "draft", file.name);
+      const { error: storageError } = await supabase.storage.from(PRODUCT_STORAGE_BUCKET).upload(path, file, { upsert: true });
+      if (storageError) {
+        throw storageError;
       }
 
-      const { data } = supabase.storage.from("product-images").getPublicUrl(path);
+      const { data } = supabase.storage.from(PRODUCT_STORAGE_BUCKET).getPublicUrl(path);
       setForm((current) => ({ ...current, imageUrl: data.publicUrl }));
       setStatusMessage("Image uploaded. Save the product to store it.");
     } catch (error) {
-      setStatusMessage(error.message || "Image upload failed.");
+      console.log("Supabase upload failed:", error);
+      const message = error?.message || "Image upload failed.";
+      setUploadError(`Upload failed: ${message}`);
+      setStatusMessage(`Upload failed: ${message}`);
     } finally {
       setUploadBusy(false);
       event.target.value = "";
@@ -2156,6 +2193,7 @@ export default function App() {
               onInlineDeleteImage={handleDeleteDetailImage}
               onInlineSetCoverImage={handleSetCoverImage}
               imageBusy={uploadBusy}
+              uploadError={uploadError}
               saveBusy={saveBusy}
               search={search}
               setSearch={setSearch}
@@ -2195,6 +2233,7 @@ export default function App() {
               onDeleteImage={handleDeleteDetailImage}
               onSetCoverImage={handleSetCoverImage}
               imageBusy={uploadBusy}
+              uploadError={uploadError}
               saveBusy={saveBusy}
             />
           </section>
@@ -2223,6 +2262,7 @@ export default function App() {
               onInlineDeleteImage={handleDeleteDetailImage}
               onInlineSetCoverImage={handleSetCoverImage}
               imageBusy={uploadBusy}
+              uploadError={uploadError}
               saveBusy={saveBusy}
               search={search}
               setSearch={setSearch}
