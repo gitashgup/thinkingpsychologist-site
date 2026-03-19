@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { products as seedProducts } from "./data/products";
 import { isSupabaseConfigured, supabase } from "./lib/supabase";
 
@@ -97,6 +97,25 @@ function formatCurrency(value) {
     currency: "INR",
     maximumFractionDigits: 0
   }).format(Number(value));
+}
+
+function hasDisplayValue(value) {
+  if (value == null) {
+    return false;
+  }
+  const normalized = String(value).trim();
+  return normalized !== "" && normalized !== "Not set";
+}
+
+function ShareIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M15 8a3 3 0 1 0-2.82-4H12a3 3 0 0 0 .18 1l-5.1 2.95a3 3 0 1 0 0 8.1l5.1 2.95A3 3 0 1 0 13 18a3 3 0 0 0-.18 1l-5.1-2.95a3 3 0 0 0 0-2.1L12.82 11A3 3 0 0 0 15 12a3 3 0 1 0 0-4Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
 }
 
 function toProduct(raw, index = 0) {
@@ -567,7 +586,31 @@ function ProductCard({ product, customerMode, onSelect, onEdit, onShare, onArchi
   );
 }
 
-function DetailPanel({ product, customerMode }) {
+function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImageReplace, imageBusy }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState({
+    name: "",
+    mrp: "",
+    b2b: "",
+    quantity: "",
+    notes: ""
+  });
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+    setDraft({
+      name: product.name ?? "",
+      mrp: product.pricing.mrp ?? "",
+      b2b: product.pricing.b2b ?? "",
+      quantity: product.quantity ?? 0,
+      notes: product.notes ?? ""
+    });
+    setEditing(false);
+  }, [product]);
+
   if (!product) {
     return (
       <aside className="detail-panel panel-card">
@@ -581,7 +624,35 @@ function DetailPanel({ product, customerMode }) {
 
   return (
     <aside className="detail-panel panel-card">
-      <ProductImage product={product} />
+      <div className="detail-image-wrap">
+        <button
+          type="button"
+          className={canManage && !customerMode ? "detail-image-button editable" : "detail-image-button"}
+          onClick={() => {
+            if (canManage && !customerMode) {
+              fileInputRef.current?.click();
+            }
+          }}
+        >
+          <ProductImage product={product} />
+          {canManage && !customerMode ? <span className="detail-image-hint">{imageBusy ? "Uploading..." : "Tap to replace photo"}</span> : null}
+        </button>
+        {canManage && !customerMode ? (
+          <input
+            ref={fileInputRef}
+            className="visually-hidden"
+            type="file"
+            accept="image/*"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) {
+                onImageReplace(product, file);
+              }
+              event.target.value = "";
+            }}
+          />
+        ) : null}
+      </div>
       <div className="section-head">
         <div>
           <p className="eyebrow">Selected Product</p>
@@ -606,18 +677,79 @@ function DetailPanel({ product, customerMode }) {
           <span>Quantity</span>
           <strong>{product.quantity}</strong>
         </div>
-        <div>
-          <span>MRP</span>
-          <strong>{formatCurrency(product.pricing.mrp)}</strong>
-        </div>
-        {!customerMode ? (
+        {hasDisplayValue(product.pricing.mrp) ? (
           <div>
-            <span>B2B</span>
-            <strong>{formatCurrency(product.pricing.b2b)}</strong>
+            <span>MRP</span>
+            <strong>{formatCurrency(product.pricing.mrp)}</strong>
           </div>
+        ) : null}
+        {!customerMode ? (
+          hasDisplayValue(product.pricing.b2b) ? (
+            <div>
+              <span>B2B</span>
+              <strong>{formatCurrency(product.pricing.b2b)}</strong>
+            </div>
+          ) : null
         ) : null}
       </div>
       {product.notes && !customerMode ? <p className="detail-note">{product.notes}</p> : null}
+      {!customerMode ? (
+        <div className="detail-actions">
+          <button type="button" className="primary-button detail-action-button" onClick={() => setEditing((value) => !value)}>
+            {editing ? "Close Editor" : "Edit Product"}
+          </button>
+          <button type="button" className="ghost-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
+            <ShareIcon />
+            <span>Share Product</span>
+          </button>
+        </div>
+      ) : (
+        <div className="detail-actions">
+          <button type="button" className="ghost-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
+            <ShareIcon />
+            <span>Share Product</span>
+          </button>
+        </div>
+      )}
+      {editing && canManage && !customerMode ? (
+        <form
+          className="detail-edit-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onEdit(product, draft);
+            setEditing(false);
+          }}
+        >
+          <label>
+            Name
+            <input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} />
+          </label>
+          <label>
+            MRP
+            <input value={draft.mrp} onChange={(event) => setDraft((current) => ({ ...current, mrp: event.target.value }))} />
+          </label>
+          <label>
+            B2B price
+            <input value={draft.b2b} onChange={(event) => setDraft((current) => ({ ...current, b2b: event.target.value }))} />
+          </label>
+          <label>
+            Stock quantity
+            <input value={draft.quantity} onChange={(event) => setDraft((current) => ({ ...current, quantity: event.target.value }))} />
+          </label>
+          <label className="span-2">
+            Description
+            <textarea rows="4" value={draft.notes} onChange={(event) => setDraft((current) => ({ ...current, notes: event.target.value }))} />
+          </label>
+          <div className="detail-edit-actions">
+            <button type="submit" className="primary-button">
+              Save Changes
+            </button>
+            <button type="button" className="ghost-button" onClick={() => setEditing(false)}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      ) : null}
       <div className="detail-links">
         {product.imageUrl ? (
           <a className="ghost-button" href={product.imageUrl} target="_blank" rel="noreferrer">
@@ -642,6 +774,11 @@ function CatalogSection({
   onShare,
   onArchiveToggle,
   selectedProduct,
+  canManage,
+  onDetailEdit,
+  onDetailShare,
+  onDetailImageReplace,
+  imageBusy,
   search,
   setSearch,
   categoryFilter,
@@ -680,7 +817,15 @@ function CatalogSection({
             </div>
           )}
         </section>
-        <DetailPanel product={selectedProduct} customerMode={customerMode} />
+        <DetailPanel
+          product={selectedProduct}
+          customerMode={customerMode}
+          canManage={canManage}
+          onEdit={onDetailEdit}
+          onShare={onDetailShare}
+          onImageReplace={onDetailImageReplace}
+          imageBusy={imageBusy}
+        />
       </main>
     </>
   );
@@ -900,11 +1045,71 @@ export default function App() {
     setActiveTab("add");
   }
 
+  async function handleDetailEdit(product, draft) {
+    if (!canManage) {
+      setStatusMessage("Sign in first to edit products.");
+      return;
+    }
+
+    const payload = {
+      name: draft.name,
+      slug: slugify(`${product.sku}-${draft.name}`),
+      quantity: Number(draft.quantity || 0),
+      mrp: draft.mrp === "" ? null : Number(draft.mrp),
+      b2b_price: draft.b2b === "" ? null : Number(draft.b2b),
+      notes: draft.notes
+    };
+
+    setSaveBusy(true);
+    try {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from("products").update(payload).eq("id", product.id).select().single();
+        if (error) {
+          throw error;
+        }
+        const normalized = toProduct(data);
+        setProducts((current) => current.map((item) => (item.id === normalized.id ? normalized : item)));
+        setSelectedId(normalized.id);
+        populateForm(normalized);
+        setStatusMessage(`${normalized.name} updated.`);
+      } else {
+        setProducts((current) =>
+          current.map((item) =>
+            item.id === product.id
+              ? toProduct({
+                  ...item,
+                  ...payload,
+                  b2b_price: payload.b2b_price,
+                  mrp: payload.mrp
+                })
+              : item
+          )
+        );
+        setStatusMessage(`${draft.name} updated locally.`);
+      }
+    } catch (error) {
+      setStatusMessage(error.message || "Could not update this product.");
+    } finally {
+      setSaveBusy(false);
+    }
+  }
+
   async function handleShareProduct(product) {
     const shareUrl = `${window.location.origin}?product=${product.slug}`;
+    const message = [
+      product.name,
+      `SKU: ${product.sku}`,
+      `Category: ${product.category}`,
+      `Material: ${product.material}`,
+      `Stock: ${product.quantity}`,
+      product.imageUrl ? `Image: ${product.imageUrl}` : null,
+      `Link: ${shareUrl}`
+    ]
+      .filter(Boolean)
+      .join("\n");
     const shareData = {
       title: product.name,
-      text: `${product.name} · ${product.category}`,
+      text: message,
       url: shareUrl
     };
 
@@ -919,6 +1124,50 @@ export default function App() {
       if (error?.name !== "AbortError") {
         setStatusMessage("Could not share this product right now.");
       }
+    }
+  }
+
+  async function handleReplaceDetailImage(product, file) {
+    if (!canManage) {
+      setStatusMessage("Sign in first to replace product photos.");
+      return;
+    }
+
+    setUploadBusy(true);
+    try {
+      if (isSupabaseConfigured) {
+        const extension = file.name.split(".").pop();
+        const path = `${product.sku}/detail-${Date.now()}.${extension}`;
+        const { error: uploadError } = await supabase.storage.from("product-images").upload(path, file, { upsert: true });
+        if (uploadError) {
+          throw uploadError;
+        }
+
+        const { data: publicUrlData } = supabase.storage.from("product-images").getPublicUrl(path);
+        const { data, error } = await supabase
+          .from("products")
+          .update({ image_url: publicUrlData.publicUrl })
+          .eq("id", product.id)
+          .select()
+          .single();
+        if (error) {
+          throw error;
+        }
+
+        const normalized = toProduct(data);
+        setProducts((current) => current.map((item) => (item.id === normalized.id ? normalized : item)));
+        setSelectedId(normalized.id);
+        populateForm(normalized);
+        setStatusMessage("Product image updated.");
+      } else {
+        const imageUrl = URL.createObjectURL(file);
+        setProducts((current) => current.map((item) => (item.id === product.id ? { ...item, imageUrl } : item)));
+        setStatusMessage("Product image updated locally.");
+      }
+    } catch (error) {
+      setStatusMessage(error.message || "Could not replace this image.");
+    } finally {
+      setUploadBusy(false);
     }
   }
 
@@ -1211,15 +1460,20 @@ export default function App() {
             }
           />
           <CatalogSection
-              products={filteredProducts}
-              customerMode
-              onSelect={(product) => setSelectedId(product.id)}
-              onEdit={() => {}}
-              onShare={() => {}}
-              onArchiveToggle={() => {}}
-              selectedProduct={selectedProduct}
-              search={search}
-              setSearch={setSearch}
+            products={filteredProducts}
+            customerMode
+            onSelect={(product) => setSelectedId(product.id)}
+            onEdit={() => {}}
+            onShare={() => {}}
+            onArchiveToggle={() => {}}
+            selectedProduct={selectedProduct}
+            canManage={false}
+            onDetailEdit={() => {}}
+            onDetailShare={handleShareProduct}
+            onDetailImageReplace={() => {}}
+            imageBusy={false}
+            search={search}
+            setSearch={setSearch}
             categoryFilter={categoryFilter}
             setCategoryFilter={setCategoryFilter}
             categories={categories}
@@ -1267,6 +1521,11 @@ export default function App() {
               onShare={handleShareProduct}
               onArchiveToggle={handleArchiveToggle}
               selectedProduct={selectedProduct}
+              canManage={canManage}
+              onDetailEdit={handleDetailEdit}
+              onDetailShare={handleShareProduct}
+              onDetailImageReplace={handleReplaceDetailImage}
+              imageBusy={uploadBusy}
               search={search}
               setSearch={setSearch}
               categoryFilter={categoryFilter}
@@ -1316,6 +1575,11 @@ export default function App() {
               onShare={handleShareProduct}
               onArchiveToggle={handleArchiveToggle}
               selectedProduct={selectedProduct}
+              canManage={canManage}
+              onDetailEdit={handleDetailEdit}
+              onDetailShare={handleShareProduct}
+              onDetailImageReplace={handleReplaceDetailImage}
+              imageBusy={uploadBusy}
               search={search}
               setSearch={setSearch}
               categoryFilter={categoryFilter}

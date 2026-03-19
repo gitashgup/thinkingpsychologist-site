@@ -607,6 +607,30 @@ h3 {
   padding: 1rem;
 }
 
+.detail-image-wrap {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.detail-image-button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+}
+
+.detail-image-button.editable {
+  cursor: pointer;
+}
+
+.detail-image-hint {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 .detail-empty,
 .empty-state {
   min-height: 240px;
@@ -623,6 +647,70 @@ h3 {
 
 .detail-links {
   flex-wrap: wrap;
+}
+
+.detail-actions {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.detail-action-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.detail-share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.detail-share-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.detail-edit-form {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.detail-edit-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.92rem;
+}
+
+.detail-edit-form input,
+.detail-edit-form textarea {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  color: var(--ink);
+  padding: 0.92rem 1rem;
+}
+
+.detail-edit-actions {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .admin-card {
@@ -805,6 +893,15 @@ h3 {
 
   .mini-stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .detail-edit-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-edit-actions {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
