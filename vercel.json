@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/product/:path*",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}
