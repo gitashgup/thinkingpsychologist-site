@@ -225,6 +225,22 @@ function ProductImage({ product, compact = false }) {
   );
 }
 
+function ProductThumb({ product }) {
+  if (product?.imageUrl) {
+    return (
+      <div className="product-thumb">
+        <img className="product-thumb-image" src={product.imageUrl} alt={product.name} loading="lazy" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="product-thumb product-thumb-fallback">
+      <span>{product?.category?.slice(0, 1) || "D"}</span>
+    </div>
+  );
+}
+
 function LandingView({ onAdmin, onCustomer }) {
   return (
     <section className="landing-shell">
@@ -477,36 +493,74 @@ function ArchivePanel({ product, onArchive, onRestore, archiveBusy }) {
   );
 }
 
-function ProductCard({ product, customerMode, onSelect, archivedVisible = false }) {
+function ProductCard({ product, customerMode, onSelect, onEdit, onShare, onArchiveToggle, archivedVisible = false }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const stockTone = product.quantity <= 0 ? "danger" : product.quantity <= 5 ? "warn" : "ok";
+
   return (
-    <article className={`product-card ${product.archivedAt ? "archived" : ""}`} onClick={() => onSelect(product)}>
-      <ProductImage product={product} compact />
-      <div className="product-card-body">
-        <div className="product-card-top">
-          <span className={`stock-pill ${product.stockStatus !== "In stock" ? "warn" : ""}`}>
-            {product.archivedAt && archivedVisible ? "Archived" : product.stockStatus}
-          </span>
-          <span className="sku-chip">{product.sku}</span>
+    <article className={`product-card product-card-row ${product.archivedAt ? "archived" : ""}`} onClick={() => onSelect(product)}>
+      <ProductThumb product={product} />
+      <div className="product-card-body product-card-body-row">
+        <div className="product-card-meta">
+          <div className="product-card-top-row">
+            <span className="sku-chip">{product.sku}</span>
+            {!customerMode ? (
+              <div className="card-menu-wrap">
+                <button
+                  type="button"
+                  className="card-menu-button"
+                  aria-label={`More actions for ${product.name}`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setMenuOpen((value) => !value);
+                  }}
+                >
+                  &#8230;
+                </button>
+                {menuOpen ? (
+                  <div
+                    className="card-menu"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        onEdit(product);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        onShare(product);
+                      }}
+                    >
+                      Share
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        onArchiveToggle(product, !product.archivedAt);
+                      }}
+                    >
+                      {product.archivedAt ? "Restore" : "Archive"}
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+          <h3>{product.name}</h3>
+          <p className="product-meta">{product.category}</p>
         </div>
-        <h3>{product.name}</h3>
-        <p className="product-meta">
-          {product.category} · {product.material}
-        </p>
-        <div className="product-card-footer">
-          <div>
-            <span>MRP</span>
-            <strong>{formatCurrency(product.pricing.mrp)}</strong>
-          </div>
-          <div>
-            <span>{customerMode ? "Available" : "In stock"}</span>
-            <strong>{product.quantity}</strong>
-          </div>
-          {!customerMode ? (
-            <div>
-              <span>B2B</span>
-              <strong>{formatCurrency(product.pricing.b2b)}</strong>
-            </div>
-          ) : null}
+        <div className={`stock-count-badge ${stockTone}`}>
+          {product.archivedAt && archivedVisible ? "Archived" : `${product.quantity} in stock`}
         </div>
       </div>
     </article>
@@ -580,7 +634,21 @@ function DetailPanel({ product, customerMode }) {
   );
 }
 
-function CatalogSection({ products, customerMode, onSelect, selectedProduct, search, setSearch, categoryFilter, setCategoryFilter, categories, archivedVisible = false }) {
+function CatalogSection({
+  products,
+  customerMode,
+  onSelect,
+  onEdit,
+  onShare,
+  onArchiveToggle,
+  selectedProduct,
+  search,
+  setSearch,
+  categoryFilter,
+  setCategoryFilter,
+  categories,
+  archivedVisible = false
+}) {
   return (
     <>
       <ControlBar
@@ -599,6 +667,9 @@ function CatalogSection({ products, customerMode, onSelect, selectedProduct, sea
                 product={product}
                 customerMode={customerMode}
                 onSelect={onSelect}
+                onEdit={onEdit}
+                onShare={onShare}
+                onArchiveToggle={onArchiveToggle}
                 archivedVisible={archivedVisible}
               />
             ))
@@ -821,6 +892,33 @@ export default function App() {
     setSelectedId(product.id);
     if (adminActive) {
       populateForm(product);
+    }
+  }
+
+  function handleEditProduct(product) {
+    handleProductSelect(product);
+    setActiveTab("add");
+  }
+
+  async function handleShareProduct(product) {
+    const shareUrl = `${window.location.origin}?product=${product.slug}`;
+    const shareData = {
+      title: product.name,
+      text: `${product.name} · ${product.category}`,
+      url: shareUrl
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      }
+      setStatusMessage(`${product.name} link ready to share.`);
+    } catch (error) {
+      if (error?.name !== "AbortError") {
+        setStatusMessage("Could not share this product right now.");
+      }
     }
   }
 
@@ -1113,12 +1211,15 @@ export default function App() {
             }
           />
           <CatalogSection
-            products={filteredProducts}
-            customerMode
-            onSelect={(product) => setSelectedId(product.id)}
-            selectedProduct={selectedProduct}
-            search={search}
-            setSearch={setSearch}
+              products={filteredProducts}
+              customerMode
+              onSelect={(product) => setSelectedId(product.id)}
+              onEdit={() => {}}
+              onShare={() => {}}
+              onArchiveToggle={() => {}}
+              selectedProduct={selectedProduct}
+              search={search}
+              setSearch={setSearch}
             categoryFilter={categoryFilter}
             setCategoryFilter={setCategoryFilter}
             categories={categories}
@@ -1162,6 +1263,9 @@ export default function App() {
               products={filteredProducts}
               customerMode={false}
               onSelect={handleProductSelect}
+              onEdit={handleEditProduct}
+              onShare={handleShareProduct}
+              onArchiveToggle={handleArchiveToggle}
               selectedProduct={selectedProduct}
               search={search}
               setSearch={setSearch}
@@ -1208,6 +1312,9 @@ export default function App() {
               products={filteredProducts}
               customerMode={false}
               onSelect={handleProductSelect}
+              onEdit={handleEditProduct}
+              onShare={handleShareProduct}
+              onArchiveToggle={handleArchiveToggle}
               selectedProduct={selectedProduct}
               search={search}
               setSearch={setSearch}
