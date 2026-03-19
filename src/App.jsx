@@ -104,7 +104,11 @@ function hasDisplayValue(value) {
     return false;
   }
   const normalized = String(value).trim();
-  return normalized !== "" && normalized !== "Not set";
+  if (normalized === "" || normalized === "Not set") {
+    return false;
+  }
+  const parsed = Number(normalized.replace(/,/g, ""));
+  return Number.isNaN(parsed) ? true : parsed !== 0;
 }
 
 function ShareIcon() {
@@ -112,6 +116,17 @@ function ShareIcon() {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
         d="M15 8a3 3 0 1 0-2.82-4H12a3 3 0 0 0 .18 1l-5.1 2.95a3 3 0 1 0 0 8.1l5.1 2.95A3 3 0 1 0 13 18a3 3 0 0 0-.18 1l-5.1-2.95a3 3 0 0 0 0-2.1L12.82 11A3 3 0 0 0 15 12a3 3 0 1 0 0-4Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function CameraIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M9 4.5 7.8 6H5.5A2.5 2.5 0 0 0 3 8.5v9A2.5 2.5 0 0 0 5.5 20h13a2.5 2.5 0 0 0 2.5-2.5v-9A2.5 2.5 0 0 0 18.5 6h-2.3L15 4.5H9Zm3 12.2a4.2 4.2 0 1 1 0-8.4 4.2 4.2 0 0 1 0 8.4Zm0-1.8a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8Z"
         fill="currentColor"
       />
     </svg>
@@ -524,6 +539,7 @@ function ProductCard({
   onInlineEdit,
   onInlineImageReplace,
   imageBusy,
+  saveBusy,
   archivedVisible = false
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -579,6 +595,12 @@ function ProductCard({
                         type="button"
                         onClick={() => {
                           setMenuOpen(false);
+                          if (!product.archivedAt) {
+                            const shouldArchive = window.confirm("Archive this product? It will be hidden from all views.");
+                            if (!shouldArchive) {
+                              return;
+                            }
+                          }
                           onArchiveToggle(product, !product.archivedAt);
                         }}
                       >
@@ -606,6 +628,7 @@ function ProductCard({
           onShare={onShare}
           onImageReplace={onInlineImageReplace}
           imageBusy={imageBusy}
+          saveBusy={saveBusy}
           inline
         />
       ) : null}
@@ -613,7 +636,7 @@ function ProductCard({
   );
 }
 
-function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImageReplace, imageBusy, inline = false }) {
+function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImageReplace, imageBusy, saveBusy, inline = false }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({
     name: "",
@@ -662,7 +685,14 @@ function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImag
           }}
         >
           <ProductImage product={product} />
-          {canManage && !customerMode ? <span className="detail-image-hint">{imageBusy ? "Uploading..." : "Tap to replace photo"}</span> : null}
+          {canManage && !customerMode ? (
+            <>
+              <span className="detail-image-camera">
+                <CameraIcon />
+              </span>
+              <span className="detail-image-hint">{imageBusy ? "Uploading..." : "Tap to replace photo"}</span>
+            </>
+          ) : null}
         </button>
         {canManage && !customerMode ? (
           <input
@@ -687,98 +717,119 @@ function DetailPanel({ product, customerMode, canManage, onEdit, onShare, onImag
         </div>
         <span className={`stock-pill ${product.stockStatus !== "In stock" ? "warn" : ""}`}>{product.stockStatus}</span>
       </div>
-      <div className="detail-grid">
-        <div>
-          <span>SKU</span>
-          <strong>{product.sku}</strong>
-        </div>
-        <div>
-          <span>Category</span>
-          <strong>{product.category}</strong>
-        </div>
-        <div>
-          <span>Material</span>
-          <strong>{product.material}</strong>
-        </div>
-        <div className="detail-quantity-block">
-          <span>Quantity</span>
-          <div className="detail-quantity-row">
-            <strong>{product.quantity}</strong>
-            <span
-              className={`stock-count-badge ${
-                product.quantity <= 0 ? "danger" : product.quantity <= 5 ? "warn" : "ok"
-              }`}
-            >
-              {product.quantity <= 0 ? "Out of stock" : product.quantity <= 5 ? "Low stock" : "In stock"}
-            </span>
+      {!editing ? (
+        <>
+          <div className="detail-grid">
+            <div>
+              <span>SKU</span>
+              <strong>{product.sku}</strong>
+            </div>
+            <div>
+              <span>Category</span>
+              <strong>{product.category}</strong>
+            </div>
+            <div>
+              <span>Material</span>
+              <strong>{product.material}</strong>
+            </div>
+            <div className="detail-quantity-block">
+              <span>Quantity</span>
+              <div className="detail-quantity-row">
+                <strong>{product.quantity}</strong>
+                <span
+                  className={`stock-count-badge ${
+                    product.quantity <= 0 ? "danger" : product.quantity <= 5 ? "warn" : "ok"
+                  }`}
+                >
+                  {product.quantity <= 0 ? "Out of stock" : product.quantity <= 5 ? "Low stock" : "In stock"}
+                </span>
+              </div>
+            </div>
+            {hasDisplayValue(product.pricing.mrp) ? (
+              <div>
+                <span>MRP</span>
+                <strong>{formatCurrency(product.pricing.mrp)}</strong>
+              </div>
+            ) : null}
+            {hasDisplayValue(product.pricing.b2b) ? (
+              <div>
+                <span>B2B</span>
+                <strong>{formatCurrency(product.pricing.b2b)}</strong>
+              </div>
+            ) : null}
           </div>
-        </div>
-        {hasDisplayValue(product.pricing.mrp) ? (
-          <div>
-            <span>MRP</span>
-            <strong>{formatCurrency(product.pricing.mrp)}</strong>
-          </div>
-        ) : null}
-        {hasDisplayValue(product.pricing.b2b) ? (
-          <div>
-            <span>B2B</span>
-            <strong>{formatCurrency(product.pricing.b2b)}</strong>
-          </div>
-        ) : null}
-      </div>
-      {product.notes ? <p className="detail-note">{product.notes}</p> : null}
-      {canManage && !customerMode ? (
-        <div className="detail-actions detail-actions-inline">
-          <button type="button" className="ghost-button detail-action-button" onClick={() => setEditing((value) => !value)}>
-            {editing ? "Close Editor" : "Edit Product"}
-          </button>
-          <button type="button" className="primary-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
-            <ShareIcon />
-            <span>Share Product</span>
-          </button>
-        </div>
-      ) : (
-        <div className="detail-actions detail-actions-inline">
-          <button type="button" className="primary-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
-            <ShareIcon />
-            <span>Share Product</span>
-          </button>
-        </div>
-      )}
+          {product.notes ? <p className="detail-note">{product.notes}</p> : null}
+          {canManage && !customerMode ? (
+            <div className="detail-actions detail-actions-inline">
+              <button type="button" className="ghost-button detail-action-button" onClick={() => setEditing(true)}>
+                Edit
+              </button>
+              <button type="button" className="primary-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
+                <ShareIcon />
+                <span>Share</span>
+              </button>
+            </div>
+          ) : (
+            <div className="detail-actions detail-actions-inline">
+              <button type="button" className="primary-button detail-action-button detail-share-button" onClick={() => onShare(product)}>
+                <ShareIcon />
+                <span>Share</span>
+              </button>
+            </div>
+          )}
+        </>
+      ) : null}
       {editing && canManage && !customerMode ? (
         <form
           className="detail-edit-form"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault();
-            onEdit(product, draft);
-            setEditing(false);
+            const didSave = await onEdit(product, draft);
+            if (didSave !== false) {
+              setEditing(false);
+            }
           }}
         >
           <label>
             Name
             <input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} />
           </label>
+          <div>
+            <span>MRP</span>
+            <input
+              type="number"
+              inputMode="decimal"
+              value={draft.mrp}
+              onChange={(event) => setDraft((current) => ({ ...current, mrp: event.target.value }))}
+            />
+          </div>
+          <div>
+            <span>B2B price</span>
+            <input
+              type="number"
+              inputMode="decimal"
+              value={draft.b2b}
+              onChange={(event) => setDraft((current) => ({ ...current, b2b: event.target.value }))}
+            />
+          </div>
           <label>
-            MRP
-            <input value={draft.mrp} onChange={(event) => setDraft((current) => ({ ...current, mrp: event.target.value }))} />
-          </label>
-          <label>
-            B2B price
-            <input value={draft.b2b} onChange={(event) => setDraft((current) => ({ ...current, b2b: event.target.value }))} />
-          </label>
-          <label>
-            Stock quantity
-            <input value={draft.quantity} onChange={(event) => setDraft((current) => ({ ...current, quantity: event.target.value }))} />
+            Quantity
+            <input
+              type="number"
+              inputMode="numeric"
+              value={draft.quantity}
+              onChange={(event) => setDraft((current) => ({ ...current, quantity: event.target.value }))}
+            />
           </label>
           <label className="span-2">
             Description
             <textarea rows="4" value={draft.notes} onChange={(event) => setDraft((current) => ({ ...current, notes: event.target.value }))} />
           </label>
           <div className="detail-edit-actions">
-            <button type="submit" className="primary-button">
-              Save Changes
+            <button type="submit" className="primary-button detail-save-button" disabled={saveBusy}>
+              {saveBusy ? "Saving..." : "Save"}
             </button>
-            <button type="button" className="ghost-button" onClick={() => setEditing(false)}>
+            <button type="button" className="detail-cancel-link" onClick={() => setEditing(false)}>
               Cancel
             </button>
           </div>
@@ -845,6 +896,7 @@ function CatalogSection({
                 onInlineEdit={onInlineEdit}
                 onInlineImageReplace={onInlineImageReplace}
                 imageBusy={imageBusy}
+                saveBusy={saveBusy}
                 archivedVisible={archivedVisible}
               />
             ))
@@ -1116,8 +1168,10 @@ export default function App() {
         );
         setStatusMessage(`${draft.name} updated locally.`);
       }
+      return true;
     } catch (error) {
       setStatusMessage(error.message || "Could not update this product.");
+      return false;
     } finally {
       setSaveBusy(false);
     }
@@ -1161,7 +1215,7 @@ export default function App() {
     try {
       if (isSupabaseConfigured) {
         const extension = file.name.split(".").pop();
-        const path = `${product.sku}/detail-${Date.now()}.${extension}`;
+        const path = `${product.sku}.${extension}`;
         const { error: uploadError } = await supabase.storage.from("product-images").upload(path, file, { upsert: true });
         if (uploadError) {
           throw uploadError;
@@ -1545,6 +1599,7 @@ export default function App() {
               onInlineEdit={handleDetailEdit}
               onInlineImageReplace={handleReplaceDetailImage}
               imageBusy={uploadBusy}
+              saveBusy={saveBusy}
               search={search}
               setSearch={setSearch}
               categoryFilter={categoryFilter}
@@ -1606,6 +1661,7 @@ export default function App() {
               onInlineEdit={handleDetailEdit}
               onInlineImageReplace={handleReplaceDetailImage}
               imageBusy={uploadBusy}
+              saveBusy={saveBusy}
               search={search}
               setSearch={setSearch}
               categoryFilter={categoryFilter}

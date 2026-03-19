@@ -623,6 +623,7 @@ h3 {
   background: transparent;
   padding: 0;
   text-align: left;
+  position: relative;
 }
 
 .detail-image-button.editable {
@@ -635,6 +636,26 @@ h3 {
   color: var(--muted);
   font-size: 0.8rem;
   text-align: center;
+}
+
+.detail-image-camera {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 2rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(44, 24, 16, 0.82);
+  color: #fff8f2;
+  border: 2px solid rgba(255, 253, 249, 0.92);
+  box-shadow: 0 10px 24px rgba(44, 24, 16, 0.18);
+}
+
+.detail-image-camera svg {
+  width: 18px;
+  height: 18px;
 }
 
 .detail-empty,
@@ -721,6 +742,20 @@ h3 {
 .detail-edit-actions {
   display: grid;
   gap: 0.7rem;
+}
+
+.detail-save-button {
+  width: 100%;
+}
+
+.detail-cancel-link {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.2rem 0;
+  justify-self: center;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 .visually-hidden {
