@@ -285,6 +285,15 @@ h3 {
   border: 1px solid var(--line);
 }
 
+.filter-pill {
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  min-height: 34px;
+  font-size: 0.84rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .ghost-button,
 .filter-pill,
 .upload-button.secondary {
@@ -526,9 +535,10 @@ h3 {
   bottom: 0.7rem;
   transform: translateX(-50%);
   width: min(100% - 1rem, 520px);
-  padding: 0.75rem 0.8rem 0.85rem;
+  min-height: 84px;
+  padding: 0.8rem 0.7rem 0.95rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   align-items: end;
   gap: 0.35rem;
   z-index: 20;
@@ -545,6 +555,18 @@ h3 {
   padding: 0.2rem;
   font-size: 0.74rem;
   font-weight: 700;
+}
+
+.nav-item:nth-child(1) {
+  grid-column: 1;
+}
+
+.nav-item:nth-child(2) {
+  grid-column: 3;
+}
+
+.nav-item:nth-child(3) {
+  grid-column: 4;
 }
 
 .nav-item.active {
@@ -586,12 +608,12 @@ h3 {
   position: absolute;
   left: 50%;
   top: 0;
-  transform: translate(-50%, -24%);
+  transform: translate(-50%, -18%);
 }
 
 .nav-fab {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: 999px;
   display: grid;
   place-items: center;
