@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { products as seedProducts } from "./data/products";
 import { isSupabaseConfigured, supabase } from "./lib/supabase";
 
@@ -114,6 +115,14 @@ function ShareIcon() {
         d="M15 8a3 3 0 1 0-2.82-4H12a3 3 0 0 0 .18 1l-5.1 2.95a3 3 0 1 0 0 8.1l5.1 2.95A3 3 0 1 0 13 18a3 3 0 0 0-.18 1l-5.1-2.95a3 3 0 0 0 0-2.1L12.82 11A3 3 0 0 0 15 12a3 3 0 1 0 0-4Z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function BackIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14.7 5.3 8 12l6.7 6.7 1.4-1.4L10.8 12l5.3-5.3-1.4-1.4Z" fill="currentColor" />
     </svg>
   );
 }
@@ -773,12 +782,6 @@ function CatalogSection({
   onEdit,
   onShare,
   onArchiveToggle,
-  selectedProduct,
-  canManage,
-  onDetailEdit,
-  onDetailShare,
-  onDetailImageReplace,
-  imageBusy,
   search,
   setSearch,
   categoryFilter,
@@ -817,8 +820,64 @@ function CatalogSection({
             </div>
           )}
         </section>
+      </main>
+    </>
+  );
+}
+
+function ProductDetailRoute({
+  products,
+  customerMode,
+  canManage,
+  onDetailEdit,
+  onDetailShare,
+  onDetailImageReplace,
+  imageBusy
+}) {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const product = products.find((item) => String(item.id) === id) || null;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [id]);
+
+  if (!product) {
+    return (
+      <div className="app-shell">
+        <div className="screen-shell detail-route-shell">
+          <button type="button" className="back-link" onClick={() => navigate(-1)}>
+            <BackIcon />
+            <span>Back</span>
+          </button>
+          <section className="panel-card empty-state">
+            <p className="eyebrow">Not found</p>
+            <h3>This product could not be found.</h3>
+          </section>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app-shell">
+      <div className="screen-shell detail-route-shell">
+        <button
+          type="button"
+          className="back-link"
+          onClick={() => {
+            if (window.history.length > 1) {
+              navigate(-1);
+            } else {
+              navigate("/");
+            }
+          }}
+        >
+          <BackIcon />
+          <span>Back</span>
+        </button>
         <DetailPanel
-          product={selectedProduct}
+          product={product}
           customerMode={customerMode}
           canManage={canManage}
           onEdit={onDetailEdit}
@@ -826,8 +885,8 @@ function CatalogSection({
           onImageReplace={onDetailImageReplace}
           imageBusy={imageBusy}
         />
-      </main>
-    </>
+      </div>
+    </div>
   );
 }
 
@@ -886,6 +945,7 @@ function BottomNav({ activeTab, setActiveTab, lowStockCount }) {
 }
 
 export default function App() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState(seedProducts.map(toProduct));
   const [selectedId, setSelectedId] = useState(seedProducts[0]?.id ?? null);
   const [search, setSearch] = useState("");
@@ -1038,6 +1098,7 @@ export default function App() {
     if (adminActive) {
       populateForm(product);
     }
+    navigate(`/product/${product.id}`);
   }
 
   function handleEditProduct(product) {
@@ -1409,81 +1470,63 @@ export default function App() {
     { label: "With photos", value: stats.withImages }
   ];
 
-  if (!adminActive && publicScreen === "landing") {
-    return (
-      <div className="app-shell">
-        <LandingView onAdmin={() => setPublicScreen("admin-auth")} onCustomer={() => setPublicScreen("customer")} />
+  const rootElement = !adminActive && publicScreen === "landing" ? (
+    <div className="app-shell">
+      <LandingView onAdmin={() => setPublicScreen("admin-auth")} onCustomer={() => setPublicScreen("customer")} />
+    </div>
+  ) : !adminActive && publicScreen === "admin-auth" ? (
+    <div className="app-shell">
+      <div className="screen-shell">
+        <ScreenHeader
+          eyebrow="Decorbeats"
+          title="Admin sign in"
+          subtitle="Use your approved admin email to unlock inventory management."
+          action={
+            <button type="button" className="ghost-button" onClick={() => setPublicScreen("landing")}>
+              Back
+            </button>
+          }
+        />
+        <StatusStrip statusMessage={statusMessage} />
+        <AuthPanel
+          email={authEmail}
+          setEmail={setAuthEmail}
+          authBusy={authBusy}
+          userEmail={userEmail}
+          onSignIn={handleSignIn}
+          onSignOut={handleSignOut}
+        />
       </div>
-    );
-  }
-
-  if (!adminActive && publicScreen === "admin-auth") {
-    return (
-      <div className="app-shell">
-        <div className="screen-shell">
-          <ScreenHeader
-            eyebrow="Decorbeats"
-            title="Admin sign in"
-            subtitle="Use your approved admin email to unlock inventory management."
-            action={
-              <button type="button" className="ghost-button" onClick={() => setPublicScreen("landing")}>
-                Back
-              </button>
-            }
-          />
-          <StatusStrip statusMessage={statusMessage} />
-          <AuthPanel
-            email={authEmail}
-            setEmail={setAuthEmail}
-            authBusy={authBusy}
-            userEmail={userEmail}
-            onSignIn={handleSignIn}
-            onSignOut={handleSignOut}
-          />
-        </div>
+    </div>
+  ) : !adminActive && publicScreen === "customer" ? (
+    <div className="app-shell">
+      <div className="screen-shell">
+        <ScreenHeader
+          eyebrow="Decorbeats Catalogue"
+          title="Customer products"
+          subtitle="Browse the current collection."
+          action={
+            <button type="button" className="ghost-button" onClick={() => setPublicScreen("landing")}>
+              Back
+            </button>
+          }
+        />
+        <CatalogSection
+          products={filteredProducts}
+          customerMode
+          onSelect={handleProductSelect}
+          onEdit={() => {}}
+          onShare={() => {}}
+          onArchiveToggle={() => {}}
+          search={search}
+          setSearch={setSearch}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          categories={categories}
+        />
       </div>
-    );
-  }
-
-  if (!adminActive && publicScreen === "customer") {
-    return (
-      <div className="app-shell">
-        <div className="screen-shell">
-          <ScreenHeader
-            eyebrow="Decorbeats Catalogue"
-            title="Customer products"
-            subtitle="Browse the current collection."
-            action={
-              <button type="button" className="ghost-button" onClick={() => setPublicScreen("landing")}>
-                Back
-              </button>
-            }
-          />
-          <CatalogSection
-            products={filteredProducts}
-            customerMode
-            onSelect={(product) => setSelectedId(product.id)}
-            onEdit={() => {}}
-            onShare={() => {}}
-            onArchiveToggle={() => {}}
-            selectedProduct={selectedProduct}
-            canManage={false}
-            onDetailEdit={() => {}}
-            onDetailShare={handleShareProduct}
-            onDetailImageReplace={() => {}}
-            imageBusy={false}
-            search={search}
-            setSearch={setSearch}
-            categoryFilter={categoryFilter}
-            setCategoryFilter={setCategoryFilter}
-            categories={categories}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  return (
+    </div>
+  ) : (
     <div className="app-shell app-shell-admin">
       <div className="screen-shell admin-shell">
         <ScreenHeader
@@ -1520,12 +1563,6 @@ export default function App() {
               onEdit={handleEditProduct}
               onShare={handleShareProduct}
               onArchiveToggle={handleArchiveToggle}
-              selectedProduct={selectedProduct}
-              canManage={canManage}
-              onDetailEdit={handleDetailEdit}
-              onDetailShare={handleShareProduct}
-              onDetailImageReplace={handleReplaceDetailImage}
-              imageBusy={uploadBusy}
               search={search}
               setSearch={setSearch}
               categoryFilter={categoryFilter}
@@ -1554,7 +1591,15 @@ export default function App() {
               onArchive={(product) => handleArchiveToggle(product, true)}
               onRestore={(product) => handleArchiveToggle(product, false)}
             />
-            <DetailPanel product={selectedProduct} customerMode={false} />
+            <DetailPanel
+              product={selectedProduct}
+              customerMode={false}
+              canManage={canManage}
+              onEdit={handleDetailEdit}
+              onShare={handleShareProduct}
+              onImageReplace={handleReplaceDetailImage}
+              imageBusy={uploadBusy}
+            />
           </section>
         ) : null}
 
@@ -1574,12 +1619,6 @@ export default function App() {
               onEdit={handleEditProduct}
               onShare={handleShareProduct}
               onArchiveToggle={handleArchiveToggle}
-              selectedProduct={selectedProduct}
-              canManage={canManage}
-              onDetailEdit={handleDetailEdit}
-              onDetailShare={handleShareProduct}
-              onDetailImageReplace={handleReplaceDetailImage}
-              imageBusy={uploadBusy}
               search={search}
               setSearch={setSearch}
               categoryFilter={categoryFilter}
@@ -1624,5 +1663,25 @@ export default function App() {
 
       <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} lowStockCount={stats.lowStock} />
     </div>
+  );
+
+  return (
+    <Routes>
+      <Route path="/" element={rootElement} />
+      <Route
+        path="/product/:id"
+        element={
+          <ProductDetailRoute
+            products={products}
+            customerMode={!adminActive}
+            canManage={canManage}
+            onDetailEdit={handleDetailEdit}
+            onDetailShare={handleShareProduct}
+            onDetailImageReplace={handleReplaceDetailImage}
+            imageBusy={uploadBusy}
+          />
+        }
+      />
+    </Routes>
   );
 }

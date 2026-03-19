@@ -87,6 +87,10 @@ h3 {
   gap: 1rem;
 }
 
+.detail-route-shell {
+  align-content: start;
+}
+
 .panel-card,
 .product-card,
 .detail-panel,
@@ -196,6 +200,23 @@ h3 {
 .screen-header,
 .panel-card {
   padding: 1rem;
+}
+
+.back-link {
+  width: fit-content;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.1rem;
+  font-weight: 700;
+}
+
+.back-link svg {
+  width: 22px;
+  height: 22px;
 }
 
 .screen-header {
