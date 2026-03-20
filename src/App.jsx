@@ -1344,16 +1344,13 @@ function FeaturedCategoriesRow({ products, onSelectCategory, onShop }) {
   );
 }
 
-function EditorialSection({ product }) {
-  const image = getPrimaryImage(product);
-  if (!image) {
-    return null;
-  }
-
+function EditorialSection() {
   return (
     <section className="editorial-section desktop-reveal">
       <div className="editorial-media">
-        <img src={image} alt={product?.name || "Decorbeats product"} loading="lazy" />
+        <div className="editorial-placeholder" aria-hidden="true">
+          <img src={brandLogo} alt="" className="editorial-watermark" loading="lazy" />
+        </div>
       </div>
       <div className="editorial-copy">
         <p className="eyebrow">Decorbeats Studio</p>
@@ -3352,7 +3349,7 @@ export default function App() {
             onSelectCategory={setCategoryFilter}
             onShop={handleScrollToCollection}
           />
-          <EditorialSection product={featuredCustomerProduct} />
+          <EditorialSection />
           <section className="customer-product-grid">
             {filteredProducts.map((product) => (
               <CustomerProductCard key={product.id} product={product} onSelect={handleProductSelect} />
