@@ -1094,6 +1094,68 @@ h3 {
   }
 }
 
+footer * {
+  color: #e8d5b7 !important;
+}
+
+footer .customer-footer-contact-item p,
+footer .customer-footer-contact-item a,
+footer .contact-value,
+footer .phone-value,
+footer .email-value {
+  color: #f5ede3 !important;
+  font-size: 15px !important;
+}
+
+footer .customer-footer-contact-item strong,
+footer .contact-label {
+  color: rgba(232, 213, 183, 0.6) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.15em !important;
+}
+
+footer .customer-footer-brand p,
+footer .customer-footer-cta p,
+footer .customer-admin-link,
+footer .customer-footer-bottom,
+footer .muted-text,
+footer .tagline,
+footer p {
+  color: #e8d5b7 !important;
+  opacity: 1 !important;
+}
+
+footer .customer-footer-bottom-tagline,
+footer .brass-tagline {
+  color: #c4885a !important;
+}
+
+footer .customer-footer-logo,
+footer img {
+  mix-blend-mode: screen !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+footer .logo-container,
+footer .logo-wrapper,
+footer .customer-footer-brand,
+footer .customer-footer-logo {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+header .customer-header-logo,
+header img {
+  mix-blend-mode: multiply !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 @keyframes customer-scroll-cue {
   0%,
   100% {
