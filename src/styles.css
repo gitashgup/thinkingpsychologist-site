@@ -480,10 +480,17 @@ h3 {
     backdrop-filter: none;
     box-shadow: none;
     border-bottom: 0;
+    min-height: 72px;
+    transition:
+      box-shadow 240ms ease,
+      border-color 240ms ease,
+      min-height 240ms ease;
   }
 
   .customer-header.scrolled {
-    box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+    min-height: 72px;
+    box-shadow: 0 10px 28px rgba(44, 24, 16, 0.08);
+    border-bottom: 2px solid rgba(139, 74, 42, 0.15);
   }
 
   .customer-header-logo,
@@ -520,17 +527,21 @@ h3 {
     min-width: 0;
     text-align: center;
     color: rgba(44, 24, 16, 0.72);
-    font-size: 0.78rem;
+    font-size: 15px;
     font-weight: 800;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     opacity: 0;
-    transition: opacity 260ms ease;
+    transform: translateY(-8px);
+    transition:
+      opacity 400ms ease,
+      transform 400ms ease;
     pointer-events: none;
   }
 
   .customer-header-ticker.visible {
     opacity: 1;
+    transform: translateY(0);
   }
 
   .customer-header-ticker span {
@@ -538,6 +549,21 @@ h3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .customer-header-ticker-button {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .customer-header-ticker:not(.visible) {
+    transform: translateY(8px);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
   }
 
   .customer-hero {

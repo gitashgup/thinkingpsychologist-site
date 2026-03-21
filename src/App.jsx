@@ -16,13 +16,16 @@ const ANNOUNCEMENTS = [
   "✦ WhatsApp us for custom gifting solutions",
   "✦ New arrivals added weekly"
 ];
-const HEADER_TICKERS = [
-  "Same-day delivery across Bangalore",
-  "Overnight shipping - Mumbai, Chennai, Pune, Hyderabad via Amazon",
-  "Sand-blasted finish - each piece individually treated",
-  "Bulk gifting from 50 to 400+ units - WhatsApp us",
-  "Handcrafted in India · Brass, Metal & Artisanal Decor",
-  "Custom corporate gifting available - enquire now"
+const TICKER_MESSAGES = [
+  { text: "𝄞  DECORBEATS — WHERE EVERY GIFT FINDS ITS RHYTHM  𝄞", action: null },
+  { text: "🚚  SAME-DAY DELIVERY ACROSS BANGALORE — ORDER BEFORE 2PM", action: "collection" },
+  { text: "✦  BRASS NEVER LIES. NEITHER DOES OUR CRAFTSMANSHIP.", action: null },
+  { text: "📦  OVERNIGHT TO MUMBAI · CHENNAI · PUNE · HYDERABAD VIA AMAZON", action: "collection" },
+  { text: "🎁  50 TO 400 UNITS — BULK GIFTING IS OUR FORTE", action: "whatsapp" },
+  { text: "✦  SAND-BLASTED. HAND-FINISHED. MADE TO BE REMEMBERED.", action: null },
+  { text: "𝄞  THE BEAT OF GOOD GIFTING — DECORBEATS STUDIO", action: null },
+  { text: "⭐  CUSTOM CORPORATE GIFTING — TELL US YOUR OCCASION", action: null },
+  { text: "✦  ARTISANAL DECOR · GIFTED WITH LOVE · SINCE INDIA BEGAN CELEBRATING", action: null }
 ];
 const INQUIRY_SYSTEM_PROMPT = `You are a data extraction assistant for Decorbeats, an Indian gifting and decor business. Extract structured information from this sales inquiry transcript. Return ONLY a valid JSON object, no explanation, no markdown.
 
@@ -1248,13 +1251,25 @@ function AnnouncementBar() {
   );
 }
 
-function CustomerHeader({ scrolled, tickerMessage, tickerVisible, onSearchTap }) {
+function CustomerHeader({ scrolled, tickerMessage, tickerAction, tickerVisible, onSearchTap, onTickerAction }) {
+  const tickerClassName = scrolled && tickerVisible ? "customer-header-ticker visible" : "customer-header-ticker";
   return (
     <header className={scrolled ? "customer-header scrolled" : "customer-header"}>
       <img src={brandLogo} alt="Decorbeats" className="customer-header-logo" />
-      <div className={scrolled && tickerVisible ? "customer-header-ticker visible" : "customer-header-ticker"} aria-hidden={!scrolled}>
-        <span>{tickerMessage}</span>
-      </div>
+      {tickerAction ? (
+        <button
+          type="button"
+          className={`${tickerClassName} customer-header-ticker-button`}
+          aria-hidden={!scrolled}
+          onClick={() => onTickerAction(tickerAction)}
+        >
+          <span>{tickerMessage}</span>
+        </button>
+      ) : (
+        <div className={tickerClassName} aria-hidden={!scrolled}>
+          <span>{tickerMessage}</span>
+        </div>
+      )}
       <button type="button" className="customer-header-search" aria-label="Search products" onClick={onSearchTap}>
         <SearchIcon />
       </button>
@@ -2420,14 +2435,8 @@ export default function App() {
 
     function handleScroll() {
       if (window.innerWidth >= 768) {
-        const hero = document.querySelector(".customer-hero");
-        const header = document.querySelector(".customer-header");
-        if (hero && header) {
-          const heroBottom = hero.getBoundingClientRect().bottom;
-          const headerHeight = header.offsetHeight;
-          setCustomerHeaderElevated(heroBottom <= headerHeight + 12);
-          return;
-        }
+        setCustomerHeaderElevated(window.scrollY > 50);
+        return;
       }
 
       setCustomerHeaderElevated(window.scrollY > 8);
@@ -2448,15 +2457,30 @@ export default function App() {
       return undefined;
     }
 
-    const intervalId = window.setInterval(() => {
-      setHeaderTickerVisible(false);
-      window.setTimeout(() => {
-        setHeaderTickerIndex((current) => (current + 1) % HEADER_TICKERS.length);
-        setHeaderTickerVisible(true);
-      }, 220);
-    }, 4000);
+    let cycleTimeoutId = null;
+    let swapTimeoutId = null;
 
-    return () => window.clearInterval(intervalId);
+    const scheduleNext = () => {
+      cycleTimeoutId = window.setTimeout(() => {
+        setHeaderTickerVisible(false);
+        swapTimeoutId = window.setTimeout(() => {
+          setHeaderTickerIndex((current) => (current + 1) % TICKER_MESSAGES.length);
+          setHeaderTickerVisible(true);
+          scheduleNext();
+        }, 300);
+      }, 3500);
+    };
+
+    scheduleNext();
+
+    return () => {
+      if (cycleTimeoutId) {
+        window.clearTimeout(cycleTimeoutId);
+      }
+      if (swapTimeoutId) {
+        window.clearTimeout(swapTimeoutId);
+      }
+    };
   }, [adminActive, customerHeaderElevated]);
 
   const customerCatalog = useMemo(() => products.filter((product) => !product.archivedAt), [products]);
@@ -3321,6 +3345,17 @@ export default function App() {
 
   const featuredCustomerProduct = customerCatalog.find((product) => getProductImages(product).length) || customerCatalog[0] || null;
   const generatedSku = form.id ? selectedProduct?.sku || "" : getNextSku(products, form.material, form.category);
+  const activeTicker = TICKER_MESSAGES[headerTickerIndex];
+
+  function handleTickerAction(action) {
+    if (action === "collection") {
+      handleScrollToCollection();
+      return;
+    }
+    if (action === "whatsapp" && typeof window !== "undefined") {
+      window.open(BULK_WHATSAPP_LINK, "_blank", "noopener,noreferrer");
+    }
+  }
 
   if (!authReady) {
     return (
@@ -3363,9 +3398,11 @@ export default function App() {
       <AnnouncementBar />
       <CustomerHeader
         scrolled={customerHeaderElevated}
-        tickerMessage={HEADER_TICKERS[headerTickerIndex]}
+        tickerMessage={activeTicker.text}
+        tickerAction={activeTicker.action}
         tickerVisible={headerTickerVisible}
         onSearchTap={handleFocusCustomerSearch}
+        onTickerAction={handleTickerAction}
       />
       <main className="customer-main">
         {adminActive && previewCustomerView ? <CustomerPreviewBanner onBack={() => {
