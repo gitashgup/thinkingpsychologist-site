@@ -1251,7 +1251,7 @@ function AnnouncementBar() {
   );
 }
 
-function CustomerHeader({ scrolled, tickerMessage, tickerAction, tickerVisible, onSearchTap, onTickerAction }) {
+function CustomerHeader({ scrolled, tickerMessage, tickerAction, tickerVisible, onSearchTap, onTickerAction, onAdmin }) {
   const tickerClassName = scrolled && tickerVisible ? "customer-header-ticker visible" : "customer-header-ticker";
   return (
     <header className={scrolled ? "customer-header scrolled" : "customer-header"}>
@@ -1270,6 +1270,9 @@ function CustomerHeader({ scrolled, tickerMessage, tickerAction, tickerVisible, 
           <span>{tickerMessage}</span>
         </div>
       )}
+      <button type="button" className="customer-header-admin-link" onClick={onAdmin}>
+        Admin
+      </button>
       <button type="button" className="customer-header-search" aria-label="Search products" onClick={onSearchTap}>
         <SearchIcon />
       </button>
@@ -1560,6 +1563,34 @@ function CustomerSheet({ product, onClose, onShare }) {
 function CustomerFooter({ onAdmin, showAdminLink = true }) {
   return (
     <footer className="customer-footer">
+      <div className="customer-footer-contact">
+        <div className="customer-footer-contact-item">
+          <span className="customer-footer-contact-icon" aria-hidden="true">
+            📍
+          </span>
+          <strong>Address</strong>
+          <p>decorbeats(OPC) Pvt Ltd, B140, DeenDayalNagar, BrassCity, Moradabad, UP India — 244001</p>
+        </div>
+        <div className="customer-footer-contact-item">
+          <span className="customer-footer-contact-icon" aria-hidden="true">
+            📞
+          </span>
+          <strong>Phone</strong>
+          <p>
+            <a href="tel:+919811133661">+91-9811-133-661</a>
+          </p>
+        </div>
+        <div className="customer-footer-contact-item">
+          <span className="customer-footer-contact-icon" aria-hidden="true">
+            ✉
+          </span>
+          <strong>Email</strong>
+          <p>
+            <a href="mailto:meghagoel@decorbeats.com">meghagoel@decorbeats.com</a>
+          </p>
+        </div>
+      </div>
+      <div className="customer-footer-divider" aria-hidden="true" />
       <div className="customer-footer-main">
         <div className="customer-footer-brand">
           <img src={brandLogo} alt="Decorbeats" className="customer-footer-logo" />
@@ -3357,6 +3388,13 @@ export default function App() {
     }
   }
 
+  function handleAdminEntry() {
+    setPublicScreen("admin-auth");
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/admin");
+    }
+  }
+
   if (!authReady) {
     return (
       <div className="app-shell">
@@ -3403,6 +3441,7 @@ export default function App() {
         tickerVisible={headerTickerVisible}
         onSearchTap={handleFocusCustomerSearch}
         onTickerAction={handleTickerAction}
+        onAdmin={handleAdminEntry}
       />
       <main className="customer-main">
         {adminActive && previewCustomerView ? <CustomerPreviewBanner onBack={() => {
@@ -3443,7 +3482,7 @@ export default function App() {
             ))}
           </section>
         </section>
-        <CustomerFooter onAdmin={() => setPublicScreen("admin-auth")} showAdminLink={!adminActive} />
+        <CustomerFooter onAdmin={handleAdminEntry} showAdminLink={!adminActive} />
       </main>
       <CustomerSheet product={selectedProduct} onClose={() => setSelectedId(null)} onShare={handleShareProduct} />
     </div>

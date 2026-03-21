@@ -237,6 +237,10 @@ h3 {
   height: 21px;
 }
 
+.customer-header-admin-link {
+  display: none;
+}
+
 .customer-header-ticker {
   display: none;
 }
@@ -519,6 +523,25 @@ h3 {
   .customer-header-search {
     width: 56px;
     height: 56px;
+  }
+
+  .customer-header-admin-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    border: 0;
+    background: transparent;
+    color: rgba(139, 74, 42, 0.5);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 180ms ease;
+  }
+
+  .customer-header-admin-link:hover {
+    color: rgba(139, 74, 42, 0.82);
   }
 
   .customer-header-ticker {
@@ -945,6 +968,53 @@ h3 {
     text-align: left;
   }
 
+  .customer-footer-contact {
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 2.4rem 1.5rem 2rem;
+  }
+
+  .customer-footer-contact-item {
+    display: grid;
+    justify-items: center;
+    gap: 0.55rem;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
+  .customer-footer-contact-item + .customer-footer-contact-item {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .customer-footer-contact-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .customer-footer-contact-item strong {
+    color: #fff7ef;
+    font-size: 0.96rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .customer-footer-contact-item p,
+  .customer-footer-contact-item a {
+    margin: 0;
+    color: rgba(247, 236, 224, 0.72);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .customer-footer-divider {
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
   .customer-footer-main {
     width: min(100%, 1200px);
     margin: 0 auto;
@@ -952,7 +1022,7 @@ h3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2rem;
     align-items: center;
-    padding: 2.5rem 1.5rem;
+    padding: 2.2rem 1.5rem;
   }
 
   .customer-footer-brand,
@@ -980,6 +1050,7 @@ h3 {
 
   .customer-admin-link {
     color: rgba(247, 236, 224, 0.74);
+    text-align: right;
   }
 
   .customer-footer-bottom {
