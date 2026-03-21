@@ -1569,7 +1569,7 @@ function CustomerFooter({ onAdmin, showAdminLink = true }) {
             📍
           </span>
           <strong>Address</strong>
-          <p>decorbeats(OPC) Pvt Ltd, B140, DeenDayalNagar, BrassCity, Moradabad, UP India — 244001</p>
+          <p>decorbeats(OPC) Pvt Ltd, B140, DeenDayalNagar, BrassCity, Moradabad, UP — 244001</p>
         </div>
         <div className="customer-footer-contact-item">
           <span className="customer-footer-contact-icon" aria-hidden="true">
@@ -1594,10 +1594,10 @@ function CustomerFooter({ onAdmin, showAdminLink = true }) {
       <div className="customer-footer-main">
         <div className="customer-footer-brand">
           <img src={brandLogo} alt="Decorbeats" className="customer-footer-logo" />
-          <p>Artisanal decor, gifted with love.</p>
+          <p>Artisanal décor, gifted with love.</p>
         </div>
         <div className="customer-footer-cta">
-          <p>For bulk orders of 50+ units, contact us directly on WhatsApp</p>
+          <p>For bulk orders of 50+ units</p>
           <a className="customer-whatsapp-button footer-whatsapp" href={BULK_WHATSAPP_LINK} target="_blank" rel="noreferrer">
             <WhatsAppIcon />
             <span>WhatsApp</span>
@@ -1606,12 +1606,17 @@ function CustomerFooter({ onAdmin, showAdminLink = true }) {
         <div className="customer-footer-owner">
           {showAdminLink ? (
             <button type="button" className="customer-admin-link" onClick={onAdmin}>
-              Are you the owner? Sign in →
+              Admin Login →
             </button>
           ) : null}
         </div>
       </div>
-      <div className="customer-footer-bottom">© 2025 Decorbeats. Artisanal décor, gifted with love.</div>
+      <div className="customer-footer-divider" aria-hidden="true" />
+      <div className="customer-footer-bottom">
+        <span>© 2025 Decorbeats.</span>
+        <span className="customer-footer-bottom-tagline">BRASS EXPERTS FROM PITAL NAGRI</span>
+        <span>Moradabad, India</span>
+      </div>
     </footer>
   );
 }
