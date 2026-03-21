@@ -191,7 +191,7 @@ h3 {
   align-items: center;
   justify-content: space-between;
   padding: 0.9rem 1rem;
-  background: rgba(245, 237, 227, 0.92);
+  background: #f5ede3;
   backdrop-filter: blur(12px);
   transition: box-shadow 180ms ease;
 }
@@ -225,7 +225,7 @@ h3 {
   height: 48px;
   border: 0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: transparent;
   color: var(--ink);
   display: grid;
   place-items: center;
@@ -472,8 +472,9 @@ h3 {
     margin: 0 auto;
     padding: 1.15rem 1.5rem;
     background: #f5ede3;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     backdrop-filter: none;
+    box-shadow: none;
+    border-bottom: 0;
   }
 
   .customer-header-logo,
