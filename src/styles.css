@@ -471,6 +471,9 @@ h3 {
     width: min(100%, 1200px);
     margin: 0 auto;
     padding: 1.15rem 1.5rem;
+    background: #f5ede3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: none;
   }
 
   .customer-header-logo,
@@ -506,6 +509,7 @@ h3 {
     min-height: calc(100vh - 72px);
     margin-inline: calc(50% - 50vw);
     margin-top: 0;
+    padding-top: 88px;
     border-radius: 0;
     box-shadow: none;
     background: none;
