@@ -377,8 +377,24 @@ h3 {
 }
 
 .customer-product-image-wrap {
+  position: relative;
   aspect-ratio: 1 / 1;
   background: rgba(255, 255, 255, 0.7);
+}
+
+.customer-new-badge {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  z-index: 1;
+  border-radius: 999px;
+  background: #8b4a2a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+  text-transform: uppercase;
 }
 
 .customer-product-image,
@@ -1405,6 +1421,13 @@ header img {
   padding: 1rem 0 0.2rem;
 }
 
+.customer-sheet-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
 .customer-sheet-meta,
 .customer-sheet-description,
 .customer-footer p {
@@ -1418,6 +1441,20 @@ header img {
   line-height: 1;
   color: var(--accent);
   font-weight: 800;
+}
+
+.customer-sheet-new-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  background: rgba(196, 136, 90, 0.22);
+  color: #9c5a10;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.65rem;
+  text-transform: uppercase;
 }
 
 .customer-sheet-occasion {

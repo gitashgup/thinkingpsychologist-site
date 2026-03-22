@@ -168,6 +168,14 @@ function formatFileSize(bytes) {
   return `${Math.round(bytes / 1024)}KB`;
 }
 
+function isNewArrival(product, windowDays = 60) {
+  const createdAt = product?.createdAt ? new Date(product.createdAt).getTime() : NaN;
+  if (!Number.isFinite(createdAt)) {
+    return false;
+  }
+  return Date.now() - createdAt < windowDays * 24 * 60 * 60 * 1000;
+}
+
 function toInquiry(raw) {
   return {
     id: raw.id,
@@ -1481,9 +1489,11 @@ function CustomerCategoryBar({ categories, categoryFilter, setCategoryFilter }) 
 function CustomerProductCard({ product, onSelect }) {
   const showLowStock = product.quantity > 0 && product.quantity <= 5;
   const primaryImage = getPrimaryImage(product);
+  const isNewProduct = isNewArrival(product);
   return (
     <button type="button" className="customer-product-card desktop-reveal" onClick={() => onSelect(product)}>
       <div className="customer-product-image-wrap">
+        {isNewProduct ? <span className="customer-new-badge">NEW</span> : null}
         {primaryImage ? (
           <img className="customer-product-image" src={primaryImage} alt={product.name} loading="lazy" />
         ) : (
@@ -1533,6 +1543,7 @@ function CustomerSheet({ product, onClose, onShare }) {
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
   const showDescription = product.notes && product.notes.trim() !== product.name.trim();
   const occasionLine = showDescription ? product.notes.trim() : "";
+  const isNewProduct = isNewArrival(product);
   const dismissSheet = () => {
     if (closing) {
       return;
@@ -1606,7 +1617,10 @@ function CustomerSheet({ product, onClose, onShare }) {
         </div>
         <CustomerImageCarousel product={product} />
         <div className="customer-sheet-copy">
-          <h2>{product.name}</h2>
+          <div className="customer-sheet-title-row">
+            <h2>{product.name}</h2>
+            {isNewProduct ? <span className="customer-sheet-new-badge">New Arrival</span> : null}
+          </div>
           {hasDisplayValue(product.pricing.mrp) ? <p className="customer-sheet-price">{formatCurrency(product.pricing.mrp)}</p> : null}
           {occasionLine ? <p className="customer-sheet-occasion">{occasionLine}</p> : null}
           <p className="customer-sheet-meta">
@@ -2609,7 +2623,11 @@ export default function App() {
     };
   }, [adminActive, customerHeaderElevated]);
 
-  const customerCatalog = useMemo(() => products.filter((product) => !product.archivedAt), [products]);
+  const customerCatalog = useMemo(() => {
+    return [...products]
+      .filter((product) => !product.archivedAt)
+      .sort((left, right) => new Date(right.createdAt || 0) - new Date(left.createdAt || 0));
+  }, [products]);
   const adminCatalog = useMemo(() => products.filter((product) => showArchived || !product.archivedAt), [products, showArchived]);
   const lowStockCatalog = useMemo(() => adminCatalog.filter((product) => product.quantity <= 10), [adminCatalog]);
 
