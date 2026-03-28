@@ -1,22 +1,350 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Decorbeats, reimagined as a premium decor and gifting experience."
-    />
-    <title>Decorbeats | Artisanal Decor Reimagined</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Ashwarya Gupta is an AI transformation leader, psychology-led facilitator, and speaker helping organisations adopt AI, lead change, and build more human, resilient cultures."
+  />
+  <title>Ashwarya Gupta | Human insight for AI, leadership, and change.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: rgba(255, 250, 244, 0.9);
+      --ink: #1b1820;
+      --muted: rgba(27, 24, 32, 0.72);
+      --line: rgba(39, 33, 47, 0.1);
+      --plum: #4f2f4b;
+      --plum-deep: #2f1a32;
+      --sage: #8ca18f;
+      --peach: #d48d68;
+      --shadow: 0 24px 70px rgba(43, 30, 35, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(212, 141, 104, 0.22), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(79, 47, 75, 0.14), transparent 26%),
+        linear-gradient(180deg, #f7f1e8 0%, #f3ede3 52%, #efe6db 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: 22px 0 72px; }
+    .topbar, .hero, .card, .cta {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      border-radius: 28px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .mark {
+      width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--plum), var(--peach)); color: #fff; font-weight: 800;
+      font-family: "Space Grotesk", sans-serif;
+    }
+    .brand strong { display: block; }
+    .brand span { color: var(--muted); font-size: 14px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 16px; color: var(--muted); }
+    .hero, .grid-2, .grid-2-even, .final { display: grid; gap: 20px; }
+    .hero {
+      grid-template-columns: 1.4fr .8fr;
+      border-radius: 38px;
+      padding: 28px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255, 250, 244, 0.9), rgba(249, 240, 230, 0.94)),
+        linear-gradient(120deg, rgba(79, 47, 75, 0.08), rgba(140, 161, 143, 0.06));
+    }
+    .grid-2 { grid-template-columns: .95fr 1.05fr; }
+    .grid-2-even { grid-template-columns: repeat(2, 1fr); }
+    .final { grid-template-columns: 1.2fr .7fr; }
+    .eyebrow, .kicker {
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--plum);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      line-height: 1;
+    }
+    h1 { font-size: clamp(44px, 7vw, 88px); letter-spacing: -.04em; }
+    h2 { font-size: clamp(32px, 4vw, 56px); letter-spacing: -.03em; }
+    h3 { font-size: clamp(22px, 2.4vw, 28px); }
+    p { margin: 0; line-height: 1.7; color: var(--muted); }
+    .hero-copy, .hero-panel, .card, .cta, .section-head { display: grid; gap: 16px; }
+    .hero-lead { color: var(--ink); font-size: 1.2rem; font-weight: 600; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 20px;
+      border-radius: 999px;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--plum-deep), var(--plum)); color: #fff7ef; }
+    .btn-secondary { border: 1px solid rgba(79, 47, 75, 0.12); background: rgba(255, 250, 244, 0.78); }
+    .pills {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pills li, .audience-pill {
+      display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 999px;
+      border: 1px solid rgba(79, 47, 75, 0.12); color: var(--plum); background: rgba(255, 250, 244, 0.7);
+    }
+    .hero-panel {
+      border-radius: 28px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(52, 29, 54, 0.96), rgba(84, 57, 83, 0.94));
+      color: #fff9f4;
+    }
+    .hero-panel p, .hero-panel li { color: rgba(255, 249, 244, 0.86); }
+    .hero-panel ul, .card ul { margin: 0; padding-left: 18px; display: grid; gap: 10px; }
+    section { margin-top: 28px; }
+    .card, .cta { border-radius: 28px; padding: 24px; }
+    .offer-grid, .pillar-grid, .program-grid, .format-list, .audience-grid { display: grid; gap: 16px; }
+    .offer-grid, .program-grid { grid-template-columns: repeat(2, 1fr); }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .format-list, .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    .program-audience { color: var(--plum); font-weight: 700; font-size: .96rem; }
+    @media (max-width: 1040px) {
+      .hero, .grid-2, .grid-2-even, .final, .offer-grid, .program-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .topbar { flex-direction: column; align-items: start; }
+      .format-list, .audience-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .hero { padding: 20px; border-radius: 28px; }
+      .card, .cta { border-radius: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">AG</div>
+        <div>
+          <strong>Ashwarya Gupta</strong>
+          <span>Human insight for AI, leadership, and change.</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#speaking">Speaking</a>
+        <a href="#organisations">Organisations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">AI transformation leader, psychology-led facilitator, and speaker</div>
+        <h1>Ashwarya Gupta</h1>
+        <div class="hero-lead">Helping leaders and organisations adopt AI, lead change, and build more human, resilient cultures.</div>
+        <p>Ashwarya Gupta brings together 16+ years of global experience across innovation, product strategy, and enterprise systems with a deep interest in psychology and human behaviour. She helps organisations navigate the real challenge of transformation: not just the technology, but the people, trust, communication, and culture required to make change work.</p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#contact">Book a Discovery Call</a>
+          <a class="btn btn-secondary" href="#programs">Explore Programs</a>
+        </div>
+        <ul class="pills">
+          <li>AI Solutions @ J.P. Morgan</li>
+          <li>16+ Years Global Experience</li>
+          <li>Innovation Award Winner</li>
+          <li>Host of Thinking Psychologist</li>
+        </ul>
+      </div>
+      <aside class="hero-panel">
+        <div class="kicker">Core positioning</div>
+        <h3>Where enterprise AI meets human insight.</h3>
+        <p>Most organisations do not struggle only with technology. They struggle with adoption, alignment, fear, communication, and the behavioural friction that comes with change. Ashwarya works at that intersection.</p>
+        <ul>
+          <li>AI transformation and leadership readiness</li>
+          <li>Communication, EQ, and trust-building</li>
+          <li>Culture change and human-centred adoption</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="grid-2" id="offerings">
+      <div class="section-head">
+        <div class="eyebrow">What I Do</div>
+        <h2>Helping organisations move from innovation talk to practical, people-ready execution.</h2>
+        <p>Ashwarya helps leaders and teams navigate AI transformation with greater clarity and trust, strengthen communication and emotional intelligence at work, build cultures of ownership and resilience, and move beyond proofs of concept toward meaningful organisational change.</p>
+      </div>
+      <div class="offer-grid">
+        <article class="card">
+          <div class="kicker">AI Leadership and Transformation</div>
+          <p>For leaders and teams navigating enterprise AI, change, and the human side of adoption.</p>
+          <ul><li>AI adoption strategy</li><li>Risk-aware transformation</li><li>Enterprise agency</li></ul>
+        </article>
+        <article class="card">
+          <div class="kicker">Communication and Emotional Intelligence</div>
+          <p>For managers, teams, and emerging leaders who need stronger conversations, better trust, and more effective collaboration.</p>
+          <ul><li>Difficult conversations</li><li>Feedback culture</li><li>Trust and collaboration</li></ul>
+        </article>
+        <article class="card">
+          <div class="kicker">Culture and Change Facilitation</div>
+          <p>For organisations building healthier cultures during growth, restructuring, digital transformation, or operating model shifts.</p>
+          <ul><li>Human-centred change</li><li>Behaviour change</li><li>Culture shift</li></ul>
+        </article>
+        <article class="card">
+          <div class="kicker">Women in Leadership</div>
+          <p>For high-potential women leaders building voice, presence, confidence, and influence.</p>
+          <ul><li>Voice and visibility</li><li>Executive presence</li><li>Confidence and influence</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid-2" id="about">
+      <article class="card">
+        <div class="eyebrow">About Ashwarya</div>
+        <h2>A rare combination of enterprise credibility and behavioural depth.</h2>
+        <p>Ashwarya Gupta is an AI transformation leader, facilitator, speaker, and host of the Thinking Psychologist podcast. With 16+ years of global experience spanning innovation, product strategy, automation, and enterprise systems, she has built her career at the intersection of technology, business value, and human behaviour.</p>
+        <p>Her current work focuses on deploying AI solutions in complex enterprise environments, with particular emphasis on governance, operational architecture, and safe adoption at scale. Alongside that, her long-standing interest in psychology shapes the way she thinks about leadership, communication, change, and culture.</p>
+      </article>
+      <div class="pillar-grid">
+        <article class="card"><div class="kicker">Enterprise-grounded</div><p>Currently leading AI Solutions for Collateral and Servicing at J.P. Morgan, Ashwarya works on operationalising AI in high-stakes enterprise environments.</p></article>
+        <article class="card"><div class="kicker">Psychology-led</div><p>Her long-standing interest in psychology and human behaviour shapes the way she thinks about leadership, communication, adoption, and culture.</p></article>
+        <article class="card"><div class="kicker">Transformation-focused</div><p>She helps organisations move beyond innovation theatre into practical, people-ready execution that can hold under real-world pressure.</p></article>
+      </div>
+    </section>
+
+    <section class="grid-2-even">
+      <article class="card">
+        <div class="eyebrow">Why This Matters</div>
+        <h2>Most AI speakers do not understand behaviour. Most leadership trainers have not built production-grade AI systems.</h2>
+        <p>Ashwarya's work is especially relevant for organisations that want to move beyond AI hype and build the mindset, structures, and human readiness required for meaningful transformation.</p>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Outcomes</div>
+        <ul>
+          <li>Leaders with stronger self-awareness and judgment</li>
+          <li>Healthier, clearer communication across teams</li>
+          <li>Greater readiness for AI-enabled change</li>
+          <li>More thoughtful adoption of new technology</li>
+          <li>Stronger cultures of trust, accountability, and ownership</li>
+          <li>Workshops that are strategic, grounded, and deeply human</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="programs">
+      <div class="section-head" style="margin-bottom:16px">
+        <div class="eyebrow">Programs</div>
+        <h2>Programs designed for the realities of leadership today.</h2>
+        <p>Sessions can be adapted for executive teams, managers, L&amp;D cohorts, universities, and institutional audiences.</p>
+      </div>
+      <div class="program-grid">
+        <article class="card"><h3>Leading in the Era of Enterprise Agency</h3><div class="program-audience">Senior leaders, transformation teams, AI leaders, operations heads, and innovation teams</div><p>How leadership changes when organisations move from automation and copilots toward agentic systems, new operating models, and risk-aware AI deployment.</p></article>
+        <article class="card"><h3>Emotional Intelligence at Work</h3><div class="program-audience">Managers, emerging leaders, team leads, and cross-functional teams</div><p>Self-awareness, emotional regulation, empathy, listening, trust, and the impact of emotional habits on leadership and team performance.</p></article>
+        <article class="card"><h3>Communicating with Clarity and Influence</h3><div class="program-audience">Leadership teams, managers, business partners, and high-potential professionals</div><p>How to communicate with greater confidence, clarity, and credibility across difficult conversations, stakeholder settings, and moments of pressure.</p></article>
+        <article class="card"><h3>Human-Centred AI Adoption in Regulated Organisations</h3><div class="program-audience">Enterprise teams, governance leaders, risk teams, AI program teams, and leadership groups</div><p>The cultural and behavioural side of AI adoption in environments where trust, auditability, and safety matter.</p></article>
+        <article class="card"><h3>Building Cultures of Trust and Ownership</h3><div class="program-audience">Leadership teams, HR/L&amp;D teams, and teams in transition</div><p>How culture is shaped through communication, accountability, psychological safety, and everyday leadership habits.</p></article>
+        <article class="card"><h3>Women in Leadership: Voice, Presence, and Power</h3><div class="program-audience">Women leaders, high-potential cohorts, and leadership development programs</div><p>Voice, confidence, boundaries, executive presence, self-trust, communication, and influence.</p></article>
+      </div>
+    </section>
+
+    <section class="grid-2-even">
+      <article class="card">
+        <div class="eyebrow">Formats</div>
+        <div class="format-list">
+          <div class="card"><h3>Keynotes</h3><p>For conferences, leadership events, and internal forums.</p></div>
+          <div class="card"><h3>Workshops</h3><p>Interactive sessions for teams, managers, and leadership groups.</p></div>
+          <div class="card"><h3>Offsites</h3><p>Facilitated strategy and reflection experiences for leaders in transition.</p></div>
+          <div class="card"><h3>Cohort Programs</h3><p>Multi-session journeys for deeper capability building.</p></div>
+          <div class="card"><h3>Custom Interventions</h3><p>Bespoke programs tailored to your organisation's context.</p></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Best Fit Audiences</div>
+        <div class="audience-grid">
+          <span class="audience-pill">Corporate leadership teams</span>
+          <span class="audience-pill">Managers and emerging leaders</span>
+          <span class="audience-pill">HR and L&amp;D teams</span>
+          <span class="audience-pill">Enterprise AI and transformation teams</span>
+          <span class="audience-pill">Universities and educator communities</span>
+          <span class="audience-pill">Women's leadership cohorts</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-2-even" id="speaking">
+      <article class="card">
+        <div class="eyebrow">Speaking</div>
+        <h2>Talks that combine strategic clarity with psychological depth.</h2>
+        <p>Ashwarya speaks on AI, leadership, human behaviour, and the cultural realities of change. Her talks are particularly strong in rooms where technology and human systems intersect.</p>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Speaking Topics</div>
+        <ul>
+          <li>Leading in the Age of Enterprise AI</li>
+          <li>The Human Side of AI Adoption</li>
+          <li>Emotional Intelligence for Modern Leadership</li>
+          <li>Communication, Trust, and Culture in Times of Change</li>
+          <li>Women in Leadership and the Psychology of Presence</li>
+          <li>Innovation, Uncertainty, and Building Resilient Teams</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid-2-even" id="organisations">
+      <article class="card">
+        <div class="eyebrow">For Organisations</div>
+        <h2>Transformation is never only technical. It is human.</h2>
+        <p>Ashwarya works with organisations that want to adopt AI more thoughtfully, support managers during periods of change, strengthen communication and emotional intelligence, and create healthier cultures of ownership and trust.</p>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Common Needs</div>
+        <ul>
+          <li>Build leadership readiness for AI-enabled transformation</li>
+          <li>Strengthen communication and emotional intelligence across teams</li>
+          <li>Support managers during periods of change</li>
+          <li>Create healthier cultures of ownership and trust</li>
+          <li>Design more human-centred approaches to transformation</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="final" id="contact">
+      <article class="card">
+        <div class="eyebrow">Let's Work Together</div>
+        <h2>Bring Ashwarya in for your next leadership, AI, or culture conversation.</h2>
+        <p>If you are looking for a keynote speaker, workshop facilitator, or thought partner for leadership, AI adoption, communication, or culture change, Ashwarya brings a perspective that is both strategic and deeply human.</p>
+        <ul>
+          <li>Tell me about your audience</li>
+          <li>Share the challenge you are solving</li>
+          <li>Let me know the format you have in mind</li>
+          <li>I'll come back with the best-fit approach</li>
+        </ul>
+      </article>
+      <aside class="cta">
+        <div class="eyebrow">Contact</div>
+        <a class="btn btn-primary" href="mailto:hello@thinkingpsychologist.com">hello@thinkingpsychologist.com</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/iknowash/">Connect on LinkedIn</a>
+        <p>This CTA can later be replaced with a booking link, enquiry form, WhatsApp button, or downloadable workshop brochure.</p>
+      </aside>
+    </section>
+  </div>
+</body>
 </html>
