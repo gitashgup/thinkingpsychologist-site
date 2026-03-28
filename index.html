@@ -121,13 +121,15 @@
     .hero-panel ul, .card ul { margin: 0; padding-left: 18px; display: grid; gap: 10px; }
     section { margin-top: 28px; }
     .card, .cta { border-radius: 28px; padding: 24px; }
-    .offer-grid, .pillar-grid, .program-grid, .format-list, .audience-grid { display: grid; gap: 16px; }
+    .offer-grid, .pillar-grid, .program-grid, .format-list, .audience-grid, .proof-grid, .clip-grid { display: grid; gap: 16px; }
     .offer-grid, .program-grid { grid-template-columns: repeat(2, 1fr); }
     .pillar-grid { grid-template-columns: 1fr; }
     .format-list, .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    .proof-grid, .clip-grid { grid-template-columns: repeat(3, 1fr); }
     .program-audience { color: var(--plum); font-weight: 700; font-size: .96rem; }
+    .proof-stat { color: var(--plum); font-family: "Fraunces", serif; font-size: 2.1rem; line-height: 1; }
     @media (max-width: 1040px) {
-      .hero, .grid-2, .grid-2-even, .final, .offer-grid, .program-grid { grid-template-columns: 1fr; }
+      .hero, .grid-2, .grid-2-even, .final, .offer-grid, .program-grid, .proof-grid, .clip-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 720px) {
       .topbar { flex-direction: column; align-items: start; }
@@ -151,6 +153,7 @@
       <nav class="nav">
         <a href="#about">About</a>
         <a href="#programs">Programs</a>
+        <a href="#media">Media</a>
         <a href="#speaking">Speaking</a>
         <a href="#organisations">Organisations</a>
         <a href="#contact">Contact</a>
@@ -247,6 +250,71 @@
           <li>Workshops that are strategic, grounded, and deeply human</li>
         </ul>
       </article>
+    </section>
+
+    <section id="media">
+      <div class="section-head" style="margin-bottom:16px">
+        <div class="eyebrow">Media and Podcast</div>
+        <h2>Public conversations that build real authority.</h2>
+        <p>The Thinking Psychologist podcast gives the brand genuine depth. It shows Ashwarya not just as a trainer, but as someone who has hosted substantive conversations on innovation, psychology, service design, resilience, and the human mind.</p>
+      </div>
+      <div class="proof-grid">
+        <article class="card">
+          <div class="proof-stat">15</div>
+          <div class="kicker">Podcast Episodes</div>
+          <p>A visible archive of long-form conversations across psychology, innovation, design, and personal growth.</p>
+        </article>
+        <article class="card">
+          <div class="proof-stat">Global</div>
+          <div class="kicker">Guest Network</div>
+          <p>Guests include psychologists, professors, coaches, design leaders, and innovation experts from multiple countries.</p>
+        </article>
+        <article class="card">
+          <div class="proof-stat">Cross-Disciplinary</div>
+          <div class="kicker">Trust Signal</div>
+          <p>This strengthens your positioning across AI, leadership, behavioural insight, and human-centred transformation.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" style="margin-bottom:16px">
+        <div class="eyebrow">Featured Conversations</div>
+        <h2>The best public conversations to lead with now.</h2>
+        <p>I’ve selected the episodes that best support your current brand: innovation, psychology, and human-centred design.</p>
+      </div>
+      <div class="clip-grid">
+        <article class="card">
+          <div class="kicker">Innovation and Leadership</div>
+          <h3>#15 An Innovators Dilemma</h3>
+          <p>This is the strongest fit for your current positioning because it signals depth around innovation, trade-offs, and leadership under uncertainty.</p>
+          <p><strong>Best use on the site:</strong> proof that you can speak intelligently about innovation beyond buzzwords.</p>
+          <div class="buttons">
+            <a class="btn btn-secondary" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube Channel</a>
+            <a class="btn btn-secondary" href="https://podcasts.apple.com/in/podcast/thinking-psychologist/id1517047161">Apple Podcasts</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="kicker">Psychology and Self-Awareness</div>
+          <h3>#14 Role of Genes in Defining Success / Failure</h3>
+          <p>This adds intellectual and behavioural depth to the brand and shows Ashwarya in dialogue with serious academic voices on motivation and self-understanding.</p>
+          <p><strong>Best use on the site:</strong> proof of substance, curiosity, and psychological credibility.</p>
+          <div class="buttons">
+            <a class="btn btn-secondary" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube Channel</a>
+            <a class="btn btn-secondary" href="https://podimo.com/shows/thinking-psychologist">Podimo</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="kicker">Human-Centred Design</div>
+          <h3>#13 User Centric Service Design</h3>
+          <p>This is excellent evidence that your thinking bridges psychology, business, and product strategy, which strongly supports your transformation story.</p>
+          <p><strong>Best use on the site:</strong> proof that you understand not just people, but systems, design, and adoption.</p>
+          <div class="buttons">
+            <a class="btn btn-secondary" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube Channel</a>
+            <a class="btn btn-secondary" href="https://www.thinkingpsychologist.com/search-results">Podcast Archive</a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section id="programs">
