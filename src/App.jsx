@@ -39,11 +39,11 @@ const whyAshwarya = [
   },
   {
     title: "Psychology-led",
-    body: "Her long-standing interest in psychology and human behaviour shapes the way she thinks about leadership, communication, adoption, and culture."
+    body: "His long-standing interest in psychology and human behaviour shapes the way he thinks about leadership, communication, adoption, and culture."
   },
   {
     title: "Transformation-focused",
-    body: "She helps organisations move beyond innovation theatre into practical, people-ready execution that can hold under real-world pressure."
+    body: "He helps organisations move beyond innovation theatre into practical, people-ready execution that can hold under real-world pressure."
   }
 ];
 
@@ -167,7 +167,7 @@ function App() {
             <p className="hero-lead">Helping leaders and organisations adopt AI, lead change, and build more human, resilient cultures.</p>
             <p className="hero-text">
               Ashwarya Gupta brings together 16+ years of global experience across innovation, product strategy, and
-              enterprise systems with a deep interest in psychology and human behaviour. She helps organisations
+              enterprise systems with a deep interest in psychology and human behaviour. He helps organisations
               navigate the real challenge of transformation: not just the technology, but the people, trust,
               communication, and culture required to make change work.
             </p>
@@ -236,13 +236,13 @@ function App() {
             <p>
               Ashwarya Gupta is an AI transformation leader, facilitator, speaker, and host of the Thinking
               Psychologist podcast. With 16+ years of global experience spanning innovation, product strategy,
-              automation, and enterprise systems, she has built her career at the intersection of technology, business
+              automation, and enterprise systems, he has built his career at the intersection of technology, business
               value, and human behaviour.
             </p>
             <p>
-              Her current work focuses on deploying AI solutions in complex enterprise environments, with particular
-              emphasis on governance, operational architecture, and safe adoption at scale. Alongside that, her
-              long-standing interest in psychology shapes the way she thinks about leadership, communication, change,
+              His current work focuses on deploying AI solutions in complex enterprise environments, with particular
+              emphasis on governance, operational architecture, and safe adoption at scale. Alongside that, his
+              long-standing interest in psychology shapes the way he thinks about leadership, communication, change,
               and culture.
             </p>
           </div>
@@ -329,7 +329,7 @@ function App() {
             <p className="eyebrow">Speaking</p>
             <h2>Talks that combine strategic clarity with psychological depth.</h2>
             <p>
-              Ashwarya speaks on AI, leadership, human behaviour, and the cultural realities of change. Her talks are
+              Ashwarya speaks on AI, leadership, human behaviour, and the cultural realities of change. His talks are
               particularly strong in rooms where technology and human systems intersect.
             </p>
           </div>
