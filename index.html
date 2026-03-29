@@ -36,7 +36,7 @@
     }
     a { color: inherit; text-decoration: none; }
     .wrap { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: 22px 0 72px; }
-    .topbar, .hero, .card, .cta {
+    .topbar, .hero, .card, .cta, .image-mock {
       border: 1px solid var(--line);
       background: var(--paper);
       box-shadow: var(--shadow);
@@ -60,7 +60,7 @@
     .brand strong { display: block; }
     .brand span { color: var(--muted); font-size: 14px; }
     .nav { display: flex; flex-wrap: wrap; gap: 16px; color: var(--muted); }
-    .hero, .grid-2, .grid-2-even, .final { display: grid; gap: 20px; }
+    .hero, .grid-2, .grid-2-even, .final, .visual-split { display: grid; gap: 20px; }
     .hero {
       grid-template-columns: 1.4fr .8fr;
       border-radius: 38px;
@@ -73,6 +73,7 @@
     .grid-2 { grid-template-columns: .95fr 1.05fr; }
     .grid-2-even { grid-template-columns: repeat(2, 1fr); }
     .final { grid-template-columns: 1.2fr .7fr; }
+    .visual-split { grid-template-columns: 1fr 1fr; }
     .eyebrow, .kicker {
       font-family: "Space Grotesk", sans-serif;
       text-transform: uppercase;
@@ -90,7 +91,7 @@
     h2 { font-size: clamp(32px, 4vw, 56px); letter-spacing: -.03em; }
     h3 { font-size: clamp(22px, 2.4vw, 28px); }
     p { margin: 0; line-height: 1.7; color: var(--muted); }
-    .hero-copy, .hero-panel, .card, .cta, .section-head { display: grid; gap: 16px; }
+    .hero-copy, .hero-panel, .card, .cta, .section-head, .visual-stack { display: grid; gap: 16px; }
     .hero-lead { color: var(--ink); font-size: 1.2rem; font-weight: 600; }
     .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn {
@@ -128,8 +129,174 @@
     .proof-grid, .clip-grid { grid-template-columns: repeat(3, 1fr); }
     .program-audience { color: var(--plum); font-weight: 700; font-size: .96rem; }
     .proof-stat { color: var(--plum); font-family: "Fraunces", serif; font-size: 2.1rem; line-height: 1; }
+    .image-mock {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(212, 141, 104, 0.26), transparent 28%),
+        linear-gradient(135deg, rgba(255, 250, 244, 0.98), rgba(237, 228, 215, 0.92));
+      min-height: 320px;
+    }
+    .image-mock::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(79, 47, 75, 0.08), transparent 32%),
+        radial-gradient(circle at 80% 24%, rgba(140, 161, 143, 0.22), transparent 24%);
+      pointer-events: none;
+    }
+    .image-mock::after {
+      content: "";
+      position: absolute;
+      right: -10%;
+      bottom: -18%;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(79, 47, 75, 0.14), transparent 62%);
+    }
+    .image-mock-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: grid;
+      align-content: end;
+      gap: 10px;
+      padding: 22px;
+    }
+    .image-label {
+      color: var(--plum);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .image-title {
+      font-family: "Fraunces", serif;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .image-copy {
+      max-width: 22rem;
+    }
+    .portrait-mock {
+      min-height: 520px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 244, 0.86), rgba(231, 220, 207, 0.98)),
+        radial-gradient(circle at 70% 22%, rgba(140, 161, 143, 0.18), transparent 20%);
+    }
+    .portrait-silhouette,
+    .stage-silhouette,
+    .workshop-silhouette {
+      position: absolute;
+      inset: auto;
+      border-radius: 999px 999px 28px 28px;
+      background: linear-gradient(180deg, rgba(79, 47, 75, 0.16), rgba(79, 47, 75, 0.34));
+      filter: blur(.2px);
+    }
+    .portrait-silhouette {
+      width: 240px;
+      height: 340px;
+      right: 8%;
+      bottom: 0;
+    }
+    .portrait-silhouette::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      top: -58px;
+      left: 60px;
+      background: rgba(79, 47, 75, 0.28);
+    }
+    .stage-mock,
+    .workshop-mock {
+      min-height: 360px;
+    }
+    .stage-silhouette {
+      width: 180px;
+      height: 250px;
+      left: 8%;
+      bottom: 0;
+    }
+    .stage-silhouette::before {
+      content: "";
+      position: absolute;
+      width: 88px;
+      height: 88px;
+      border-radius: 999px;
+      top: -42px;
+      left: 44px;
+      background: rgba(79, 47, 75, 0.3);
+    }
+    .stage-audience {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 76px;
+      background:
+        radial-gradient(circle at 8% 20%, rgba(27, 24, 32, 0.22) 0 10px, transparent 11px),
+        radial-gradient(circle at 20% 50%, rgba(27, 24, 32, 0.2) 0 10px, transparent 11px),
+        radial-gradient(circle at 34% 32%, rgba(27, 24, 32, 0.18) 0 11px, transparent 12px),
+        radial-gradient(circle at 48% 55%, rgba(27, 24, 32, 0.24) 0 10px, transparent 11px),
+        radial-gradient(circle at 62% 30%, rgba(27, 24, 32, 0.18) 0 10px, transparent 11px),
+        radial-gradient(circle at 76% 50%, rgba(27, 24, 32, 0.22) 0 10px, transparent 11px),
+        radial-gradient(circle at 90% 34%, rgba(27, 24, 32, 0.18) 0 10px, transparent 11px);
+      opacity: .85;
+    }
+    .workshop-silhouette {
+      width: 220px;
+      height: 210px;
+      left: 10%;
+      bottom: 0;
+      border-radius: 24px;
+    }
+    .workshop-silhouette::before,
+    .workshop-silhouette::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(79, 47, 75, 0.28);
+    }
+    .workshop-silhouette::before {
+      width: 72px;
+      height: 72px;
+      top: -36px;
+      left: 18px;
+    }
+    .workshop-silhouette::after {
+      width: 72px;
+      height: 72px;
+      top: -36px;
+      right: 18px;
+    }
+    .workshop-board {
+      position: absolute;
+      right: 8%;
+      top: 16%;
+      width: 180px;
+      height: 120px;
+      border-radius: 18px;
+      border: 1px solid rgba(79, 47, 75, 0.14);
+      background: rgba(255, 250, 244, 0.66);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+    }
+    .workshop-board::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      background:
+        linear-gradient(rgba(79, 47, 75, 0.16), rgba(79, 47, 75, 0.16)) 0 0 / 100% 2px no-repeat,
+        linear-gradient(rgba(79, 47, 75, 0.12), rgba(79, 47, 75, 0.12)) 0 26px / 82% 2px no-repeat,
+        linear-gradient(rgba(79, 47, 75, 0.12), rgba(79, 47, 75, 0.12)) 0 52px / 68% 2px no-repeat;
+    }
     @media (max-width: 1040px) {
-      .hero, .grid-2, .grid-2-even, .final, .offer-grid, .program-grid, .proof-grid, .clip-grid { grid-template-columns: 1fr; }
+      .hero, .grid-2, .grid-2-even, .final, .offer-grid, .program-grid, .proof-grid, .clip-grid, .visual-split { grid-template-columns: 1fr; }
     }
     @media (max-width: 720px) {
       .topbar { flex-direction: column; align-items: start; }
@@ -187,6 +354,37 @@
           <li>Culture change and human-centred adoption</li>
         </ul>
       </aside>
+    </section>
+
+    <section class="visual-split">
+      <article class="image-mock portrait-mock">
+        <div class="portrait-silhouette"></div>
+        <div class="image-mock-inner">
+          <div class="image-label">Hero Portrait Placeholder</div>
+          <div class="image-title">Replace with your strongest editorial headshot.</div>
+          <p class="image-copy">Best final image: direct eye contact, premium styling, soft neutral background, speaker-level confidence.</p>
+        </div>
+      </article>
+      <div class="visual-stack">
+        <article class="image-mock stage-mock">
+          <div class="stage-silhouette"></div>
+          <div class="stage-audience"></div>
+          <div class="image-mock-inner">
+            <div class="image-label">Speaking Placeholder</div>
+            <div class="image-title">Auditorium / keynote image</div>
+            <p class="image-copy">This is the visual proof that instantly tells buyers you belong on stage.</p>
+          </div>
+        </article>
+        <article class="image-mock workshop-mock">
+          <div class="workshop-silhouette"></div>
+          <div class="workshop-board"></div>
+          <div class="image-mock-inner">
+            <div class="image-label">Workshop Placeholder</div>
+            <div class="image-title">Facilitation image</div>
+            <p class="image-copy">Use this for a coaching, workshop, or group-learning photograph with participants visible.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="grid-2" id="offerings">
