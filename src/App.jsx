@@ -162,12 +162,13 @@ function App() {
       <main>
         <section className="hero" id="hero">
           <div className="hero-copy">
-            <p className="eyebrow">AI transformation leader, psychology-led facilitator, and speaker</p>
+            <p className="eyebrow">Clinical Psychologist, AI transformation leader, and speaker</p>
             <h1>Ashwarya Gupta</h1>
             <p className="hero-lead">Helping leaders and organisations adopt AI, lead change, and build more human, resilient cultures.</p>
             <p className="hero-text">
-              Ashwarya Gupta brings together 16+ years of global experience across innovation, product strategy, and
-              enterprise systems with a deep interest in psychology and human behaviour. He helps organisations
+              Ashwarya Gupta is a Clinical Psychologist, AI transformation leader, facilitator, and speaker. He
+              brings together 16+ years of global experience across innovation, product strategy, and enterprise
+              systems with a deep interest in psychology and human behaviour. He helps organisations
               navigate the real challenge of transformation: not just the technology, but the people, trust,
               communication, and culture required to make change work.
             </p>
@@ -234,16 +235,16 @@ function App() {
             <p className="eyebrow">About Ashwarya</p>
             <h2>A rare combination of enterprise credibility and behavioural depth.</h2>
             <p>
-              Ashwarya Gupta is an AI transformation leader, facilitator, speaker, and host of the Thinking
-              Psychologist podcast. With 16+ years of global experience spanning innovation, product strategy,
-              automation, and enterprise systems, he has built his career at the intersection of technology, business
+              Ashwarya Gupta is a Clinical Psychologist, AI transformation leader, facilitator, speaker, and host of
+              the Thinking Psychologist podcast. With 16+ years of global experience spanning innovation, product
+              strategy, automation, and enterprise systems, he has built his career at the intersection of technology, business
               value, and human behaviour.
             </p>
             <p>
-              His current work focuses on deploying AI solutions in complex enterprise environments, with particular
-              emphasis on governance, operational architecture, and safe adoption at scale. Alongside that, his
-              long-standing interest in psychology shapes the way he thinks about leadership, communication, change,
-              and culture.
+              He also holds an M.A. in Clinical Psychology, which informs the way he thinks about behaviour,
+              self-awareness, communication, trust, adaptation, and the emotional realities of change. His current
+              work focuses on deploying AI solutions in complex enterprise environments, with particular emphasis on
+              governance, operational architecture, and safe adoption at scale.
             </p>
           </div>
 
