@@ -1,17 +1,46 @@
 <svg width="1200" height="1400" viewBox="0 0 1200 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="1400" fill="#1A3A2E"/>
-  <rect x="56" y="56" width="1088" height="1288" stroke="rgba(249,246,240,0.16)" stroke-width="2"/>
-  <path d="M0 220H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M0 520H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M0 820H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M0 1120H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M220 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M520 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M820 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <path d="M1080 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
-  <circle cx="625" cy="420" r="120" fill="#B8892A" fill-opacity="0.34"/>
-  <path d="M440 620C440 510 529.543 420 640 420C750.457 420 840 510 840 620V734C840 844.457 750.457 934 640 934C529.543 934 440 844.457 440 734V620Z" fill="rgba(184,137,42,0.24)"/>
-  <path d="M334 1128C334 968.943 462.943 840 622 840H658C817.057 840 946 968.943 946 1128V1260H334V1128Z" fill="rgba(249,246,240,0.18)"/>
-  <text x="96" y="124" fill="#F9F6F0" fill-opacity="0.72" font-family="Cormorant Garamond, serif" font-size="40" font-style="italic">Editorial portrait placeholder</text>
+  <rect x="48" y="48" width="1104" height="1304" stroke="rgba(249,246,240,0.16)" stroke-width="2"/>
+  <rect x="132" y="148" width="936" height="1080" fill="url(#bg)"/>
+  <path d="M132 320H1068" stroke="rgba(249,246,240,0.08)"/>
+  <path d="M132 592H1068" stroke="rgba(249,246,240,0.08)"/>
+  <path d="M132 864H1068" stroke="rgba(249,246,240,0.08)"/>
+  <path d="M340 148V1228" stroke="rgba(249,246,240,0.05)"/>
+  <path d="M600 148V1228" stroke="rgba(249,246,240,0.05)"/>
+  <path d="M860 148V1228" stroke="rgba(249,246,240,0.05)"/>
+  <ellipse cx="602" cy="266" rx="236" ry="168" fill="rgba(184,137,42,0.16)"/>
+  <ellipse cx="602" cy="510" rx="198" ry="256" fill="rgba(184,137,42,0.11)"/>
+  <path d="M424 1242C424 1020.62 603.462 841 824.8 841H879.2C1100.54 841 1280 1020.62 1280 1242V1492H424V1242Z" fill="rgba(249,246,240,0.1)"/>
+  <path d="M394 1126C394 946.183 539.797 800.4 719.6 800.4H745.4C925.203 800.4 1071 946.183 1071 1126V1260H394V1126Z" fill="rgba(14,25,20,0.68)"/>
+  <path d="M470 1286L558 868H638L580 1286H470Z" fill="#141210"/>
+  <path d="M726 1286L640 868H560L618 1286H726Z" fill="#141210"/>
+  <path d="M530 878C530 763.162 623.162 670 738 670H746C860.838 670 954 763.162 954 878V1034H530V878Z" fill="#2B3D34"/>
+  <path d="M594 712C594 629.157 661.157 562 744 562C826.843 562 894 629.157 894 712V744C894 826.843 826.843 894 744 894C661.157 894 594 826.843 594 744V712Z" fill="url(#skin)"/>
+  <path d="M594 722C594 615.961 679.961 530 786 530H792C898.039 530 984 615.961 984 722V744H594V722Z" fill="#111715"/>
+  <path d="M618 712C618 651.248 667.248 602 728 602H748C808.752 602 858 651.248 858 712V748C858 808.752 808.752 858 748 858H728C667.248 858 618 808.752 618 748V712Z" fill="url(#skinLight)"/>
+  <path d="M654 694C654 662.52 679.52 637 711 637H777C808.48 637 834 662.52 834 694V700C834 731.48 808.48 757 777 757H711C679.52 757 654 731.48 654 700V694Z" fill="rgba(255,255,255,0.03)"/>
+  <path d="M670 798C693 816.667 720.667 826 753 826C785.333 826 813 816.667 836 798" stroke="#8A5936" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="702" cy="732" r="10" fill="#141210"/>
+  <circle cx="804" cy="732" r="10" fill="#141210"/>
+  <path d="M686 692C701.333 681.333 717.333 676 734 676" stroke="#141210" stroke-width="6" stroke-linecap="round"/>
+  <path d="M772 676C788.667 676 804.667 681.333 820 692" stroke="#141210" stroke-width="6" stroke-linecap="round"/>
+  <path d="M690 778C709 786.667 729.667 791 752 791C774.333 791 795 786.667 814 778" stroke="#9A6A45" stroke-width="5" stroke-linecap="round"/>
+  <rect x="660" y="920" width="184" height="34" rx="17" fill="#B8892A" fill-opacity="0.18"/>
+  <rect x="710" y="884" width="86" height="186" fill="#F9F6F0" fill-opacity="0.07"/>
+  <text x="96" y="116" fill="#F9F6F0" fill-opacity="0.76" font-family="Cormorant Garamond, serif" font-size="42" font-style="italic">Portrait placeholder / editorial mood</text>
   <text x="96" y="1310" fill="#B8892A" font-family="DM Sans, sans-serif" font-size="22" letter-spacing="5">REPLACE WITH PROFESSIONAL HEADSHOT</text>
+  <defs>
+    <linearGradient id="bg" x1="132" y1="148" x2="1068" y2="1228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#214336"/>
+      <stop offset="1" stop-color="#183227"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="680" y1="578" x2="862" y2="866" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C88D64"/>
+      <stop offset="1" stop-color="#8F5F3F"/>
+    </linearGradient>
+    <linearGradient id="skinLight" x1="656" y1="616" x2="826" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D79A6F"/>
+      <stop offset="1" stop-color="#A46F4A"/>
+    </linearGradient>
+  </defs>
 </svg>

@@ -1,26 +1,48 @@
 <svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="980" fill="#1A3A2E"/>
-  <rect x="52" y="52" width="1496" height="876" stroke="rgba(249,246,240,0.14)" stroke-width="2"/>
-  <rect x="0" y="0" width="1600" height="980" fill="url(#grad)"/>
-  <path d="M0 676H1600" stroke="rgba(249,246,240,0.14)" stroke-width="2"/>
-  <path d="M128 0V980" stroke="rgba(249,246,240,0.06)"/>
-  <path d="M448 0V980" stroke="rgba(249,246,240,0.06)"/>
-  <path d="M768 0V980" stroke="rgba(249,246,240,0.06)"/>
-  <path d="M1088 0V980" stroke="rgba(249,246,240,0.06)"/>
-  <path d="M1408 0V980" stroke="rgba(249,246,240,0.06)"/>
-  <rect x="932" y="178" width="380" height="210" stroke="#B8892A" stroke-width="2" fill="rgba(249,246,240,0.06)"/>
-  <path d="M286 636C286 528.304 373.304 441 481 441H491C598.696 441 686 528.304 686 636V738H286V636Z" fill="rgba(249,246,240,0.18)"/>
-  <circle cx="487" cy="367" r="86" fill="rgba(184,137,42,0.42)"/>
-  <rect x="632" y="476" width="24" height="214" fill="#B8892A"/>
-  <circle cx="642" cy="450" r="36" fill="#B8892A"/>
-  <path d="M0 760C160 720 286 714 410 760C532 804 640 836 784 792C926 746 1038 700 1180 736C1322 772 1430 830 1600 794V980H0V760Z" fill="rgba(249,246,240,0.16)"/>
-  <path d="M0 840C134 796 220 796 346 840C472 884 578 916 730 876C880 836 1004 778 1148 812C1290 846 1436 908 1600 880V980H0V840Z" fill="rgba(20,18,16,0.32)"/>
-  <text x="96" y="126" fill="#F9F6F0" fill-opacity="0.72" font-family="Cormorant Garamond, serif" font-size="44" font-style="italic">Auditorium / keynote placeholder</text>
+  <rect width="1600" height="980" fill="#10281F"/>
+  <rect x="48" y="48" width="1504" height="884" stroke="rgba(249,246,240,0.14)" stroke-width="2"/>
+  <rect x="120" y="126" width="1360" height="520" fill="url(#stageBg)"/>
+  <ellipse cx="800" cy="190" rx="430" ry="92" fill="rgba(184,137,42,0.18)"/>
+  <ellipse cx="366" cy="214" rx="124" ry="172" fill="url(#lightL)" fill-opacity="0.75"/>
+  <ellipse cx="1234" cy="214" rx="124" ry="172" fill="url(#lightR)" fill-opacity="0.72"/>
+  <path d="M120 642H1480" stroke="rgba(249,246,240,0.11)" stroke-width="2"/>
+  <rect x="1018" y="188" width="290" height="168" fill="rgba(249,246,240,0.05)" stroke="#B8892A" stroke-width="2"/>
+  <path d="M630 680C630 544.138 740.138 434 876 434H886C1021.86 434 1132 544.138 1132 680V816H630V680Z" fill="rgba(20,18,16,0.42)"/>
+  <path d="M688 566C688 470.455 765.455 393 861 393C956.545 393 1034 470.455 1034 566V604C1034 699.545 956.545 777 861 777C765.455 777 688 699.545 688 604V566Z" fill="url(#speakerSkin)"/>
+  <path d="M674 566C674 451.677 766.677 359 881 359C995.323 359 1088 451.677 1088 566V592H674V566Z" fill="#111715"/>
+  <path d="M678 822C678 683.928 789.928 572 928 572H964C1102.07 572 1214 683.928 1214 822V980H678V822Z" fill="#121815"/>
+  <path d="M586 844C586 700.406 702.406 584 846 584H874C1017.59 584 1134 700.406 1134 844V980H586V844Z" fill="#203429"/>
+  <path d="M582 842L768 630H864L696 980H582V842Z" fill="#111715"/>
+  <path d="M1012 980L924 628H996L1134 980H1012Z" fill="#111715"/>
+  <rect x="770" y="600" width="24" height="206" fill="#B8892A"/>
+  <circle cx="782" cy="572" r="36" fill="#B8892A"/>
+  <path d="M802 634L730 700" stroke="#C88D64" stroke-width="14" stroke-linecap="round"/>
+  <path d="M1032 668L1152 730" stroke="#C88D64" stroke-width="14" stroke-linecap="round"/>
+  <path d="M120 748C206 702 292 680 378 686C464 692 550 726 636 722C722 718 808 672 894 662C980 652 1066 676 1152 708C1238 740 1324 770 1410 766C1434 765 1458 762 1480 756V980H120V748Z" fill="rgba(249,246,240,0.12)"/>
+  <path d="M120 810C228 758 324 744 408 754C492 764 570 808 654 812C738 816 816 780 900 770C984 760 1062 776 1146 816C1230 856 1308 888 1392 884C1422 883 1452 879 1480 872V980H120V810Z" fill="rgba(10,12,11,0.42)"/>
+  <circle cx="282" cy="816" r="54" fill="rgba(20,18,16,0.6)"/>
+  <circle cx="470" cy="834" r="62" fill="rgba(20,18,16,0.58)"/>
+  <circle cx="654" cy="842" r="58" fill="rgba(20,18,16,0.62)"/>
+  <circle cx="1238" cy="846" r="64" fill="rgba(20,18,16,0.62)"/>
+  <circle cx="1380" cy="834" r="54" fill="rgba(20,18,16,0.58)"/>
+  <text x="96" y="118" fill="#F9F6F0" fill-opacity="0.76" font-family="Cormorant Garamond, serif" font-size="44" font-style="italic">Keynote placeholder / editorial stage mood</text>
   <text x="96" y="916" fill="#B8892A" font-family="DM Sans, sans-serif" font-size="22" letter-spacing="5">REPLACE WITH ON-STAGE SPEAKING IMAGE</text>
   <defs>
-    <linearGradient id="grad" x1="0" y1="0" x2="1600" y2="980" gradientUnits="userSpaceOnUse">
+    <linearGradient id="stageBg" x1="120" y1="126" x2="1480" y2="646" gradientUnits="userSpaceOnUse">
       <stop stop-color="#1A3A2E"/>
-      <stop offset="1" stop-color="#233F34"/>
+      <stop offset="1" stop-color="#193328"/>
+    </linearGradient>
+    <linearGradient id="lightL" x1="366" y1="42" x2="366" y2="386" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C5A243" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#C5A243" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lightR" x1="1234" y1="42" x2="1234" y2="386" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C5A243" stop-opacity="0.68"/>
+      <stop offset="1" stop-color="#C5A243" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="speakerSkin" x1="748" y1="410" x2="990" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D5986E"/>
+      <stop offset="1" stop-color="#9B6845"/>
     </linearGradient>
   </defs>
 </svg>

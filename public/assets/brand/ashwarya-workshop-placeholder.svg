@@ -1,25 +1,40 @@
 <svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1600" height="980" fill="#F9F6F0"/>
-  <rect x="52" y="52" width="1496" height="876" stroke="rgba(20,18,16,0.14)" stroke-width="2"/>
-  <path d="M0 188H1600" stroke="rgba(20,18,16,0.08)" stroke-width="1"/>
-  <path d="M0 492H1600" stroke="rgba(20,18,16,0.08)" stroke-width="1"/>
-  <path d="M0 796H1600" stroke="rgba(20,18,16,0.08)" stroke-width="1"/>
-  <path d="M240 0V980" stroke="rgba(20,18,16,0.06)" stroke-width="1"/>
-  <path d="M560 0V980" stroke="rgba(20,18,16,0.06)" stroke-width="1"/>
-  <path d="M880 0V980" stroke="rgba(20,18,16,0.06)" stroke-width="1"/>
-  <path d="M1200 0V980" stroke="rgba(20,18,16,0.06)" stroke-width="1"/>
-  <rect x="930" y="142" width="430" height="250" fill="#1A3A2E"/>
-  <rect x="962" y="174" width="366" height="186" stroke="#B8892A" stroke-width="2"/>
-  <path d="M244 810C244 730.471 308.471 666 388 666H400C479.529 666 544 730.471 544 810V874H244V810Z" fill="rgba(26,58,46,0.18)"/>
-  <circle cx="396" cy="612" r="68" fill="rgba(184,137,42,0.46)"/>
-  <path d="M624 826C624 756.412 680.412 700 750 700H758C827.588 700 884 756.412 884 826V882H624V826Z" fill="rgba(26,58,46,0.18)"/>
-  <circle cx="754" cy="650" r="58" fill="rgba(20,18,16,0.16)"/>
-  <path d="M1010 844C1010 776.621 1064.62 722 1132 722H1140C1207.38 722 1262 776.621 1262 844V892H1010V844Z" fill="rgba(26,58,46,0.18)"/>
-  <circle cx="1136" cy="676" r="54" fill="rgba(20,18,16,0.16)"/>
-  <path d="M392 522C392 415.372 478.372 329 585 329H597C703.628 329 790 415.372 790 522V622H392V522Z" fill="rgba(184,137,42,0.22)"/>
-  <circle cx="592" cy="270" r="90" fill="rgba(184,137,42,0.52)"/>
-  <rect x="822" y="500" width="24" height="176" fill="#B8892A"/>
-  <circle cx="834" cy="472" r="32" fill="#B8892A"/>
-  <text x="96" y="126" fill="#141210" fill-opacity="0.76" font-family="Cormorant Garamond, serif" font-size="44" font-style="italic">Workshop / facilitation placeholder</text>
+  <rect x="48" y="48" width="1504" height="884" stroke="rgba(20,18,16,0.14)" stroke-width="2"/>
+  <rect x="108" y="126" width="1384" height="724" fill="url(#room)"/>
+  <path d="M108 272H1492" stroke="rgba(20,18,16,0.08)"/>
+  <path d="M108 510H1492" stroke="rgba(20,18,16,0.08)"/>
+  <path d="M108 748H1492" stroke="rgba(20,18,16,0.08)"/>
+  <path d="M386 126V850" stroke="rgba(20,18,16,0.06)"/>
+  <path d="M692 126V850" stroke="rgba(20,18,16,0.06)"/>
+  <path d="M998 126V850" stroke="rgba(20,18,16,0.06)"/>
+  <path d="M1304 126V850" stroke="rgba(20,18,16,0.06)"/>
+  <rect x="930" y="172" width="408" height="224" fill="#1A3A2E"/>
+  <rect x="964" y="204" width="340" height="160" stroke="#B8892A" stroke-width="2"/>
+  <path d="M484 770C484 632.517 595.517 521 733 521H745C882.483 521 994 632.517 994 770V864H484V770Z" fill="#203429"/>
+  <path d="M566 622C566 527.493 642.493 451 737 451C831.507 451 908 527.493 908 622V658C908 752.507 831.507 829 737 829C642.493 829 566 752.507 566 658V622Z" fill="url(#facilitatorSkin)"/>
+  <path d="M546 620C546 511.751 633.751 424 742 424C850.249 424 938 511.751 938 620V638H546V620Z" fill="#141210"/>
+  <path d="M614 748L756 610H822L714 864H614V748Z" fill="#141210"/>
+  <path d="M802 602L950 694" stroke="#C88D64" stroke-width="14" stroke-linecap="round"/>
+  <path d="M640 620L532 690" stroke="#C88D64" stroke-width="14" stroke-linecap="round"/>
+  <rect x="408" y="824" width="784" height="72" fill="rgba(20,18,16,0.14)"/>
+  <rect x="438" y="794" width="724" height="42" fill="rgba(20,18,16,0.08)"/>
+  <path d="M248 882C248 787.487 324.493 711 419 711H427C521.507 711 598 787.487 598 882V980H248V882Z" fill="rgba(26,58,46,0.2)"/>
+  <circle cx="423" cy="666" r="72" fill="rgba(20,18,16,0.22)"/>
+  <path d="M684 894C684 818.335 745.335 757 821 757H829C904.665 757 966 818.335 966 894V980H684V894Z" fill="rgba(26,58,46,0.18)"/>
+  <circle cx="825" cy="720" r="58" fill="rgba(20,18,16,0.18)"/>
+  <path d="M1050 886C1050 804.262 1116.26 738 1198 738H1206C1287.74 738 1354 804.262 1354 886V980H1050V886Z" fill="rgba(26,58,46,0.2)"/>
+  <circle cx="1202" cy="694" r="62" fill="rgba(20,18,16,0.22)"/>
+  <text x="96" y="118" fill="#141210" fill-opacity="0.76" font-family="Cormorant Garamond, serif" font-size="44" font-style="italic">Workshop placeholder / live facilitation mood</text>
   <text x="96" y="916" fill="#1A3A2E" font-family="DM Sans, sans-serif" font-size="22" letter-spacing="5">REPLACE WITH TEAM OR FACILITATION IMAGE</text>
+  <defs>
+    <linearGradient id="room" x1="108" y1="126" x2="1492" y2="850" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3EBDD"/>
+      <stop offset="1" stop-color="#EEE4D2"/>
+    </linearGradient>
+    <linearGradient id="facilitatorSkin" x1="624" y1="468" x2="860" y2="808" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D69B70"/>
+      <stop offset="1" stop-color="#A46E4B"/>
+    </linearGradient>
+  </defs>
 </svg>
