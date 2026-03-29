@@ -10,607 +10,868 @@
   <title>Ashwarya Gupta | Human insight for AI, leadership, and change.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --paper: rgba(255, 250, 244, 0.9);
-      --ink: #1b1820;
-      --muted: rgba(27, 24, 32, 0.72);
-      --line: rgba(39, 33, 47, 0.1);
-      --plum: #4f2f4b;
-      --plum-deep: #2f1a32;
-      --sage: #8ca18f;
-      --peach: #d48d68;
-      --shadow: 0 24px 70px rgba(43, 30, 35, 0.12);
+      --paper: #f9f6f0;
+      --forest: #1a3a2e;
+      --gold: #b8892a;
+      --ink: #141210;
+      --muted: #72695f;
+      --line: rgba(20, 18, 16, 0.18);
+      --line-soft: rgba(20, 18, 16, 0.1);
+      --panel-dark: rgba(15, 31, 24, 0.72);
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      color: var(--ink);
-      font-family: "Manrope", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(212, 141, 104, 0.22), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(79, 47, 75, 0.14), transparent 26%),
-        linear-gradient(180deg, #f7f1e8 0%, #f3ede3 52%, #efe6db 100%);
-    }
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: 22px 0 72px; }
-    .topbar, .hero, .card, .cta, .image-mock {
-      border: 1px solid var(--line);
       background: var(--paper);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      width: min(1280px, calc(100% - 48px));
+      margin: 0 auto;
+      padding-bottom: 48px;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.4s; }
+    .delay-4 { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .topbar {
-      display: flex;
-      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      gap: 20px;
-      border-radius: 28px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
+      gap: 24px;
+      min-height: 82px;
+      border-bottom: 0.5px solid var(--line);
+      background: rgba(249, 246, 240, 0.9);
+      backdrop-filter: blur(10px);
     }
-    .brand { display: flex; align-items: center; gap: 14px; }
-    .mark {
-      width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center;
-      background: linear-gradient(135deg, var(--plum), var(--peach)); color: #fff; font-weight: 800;
-      font-family: "Space Grotesk", sans-serif;
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
     }
-    .brand strong { display: block; }
-    .brand span { color: var(--muted); font-size: 14px; }
-    .nav { display: flex; flex-wrap: wrap; gap: 16px; color: var(--muted); }
-    .hero, .grid-2, .grid-2-even, .final, .visual-split { display: grid; gap: 20px; }
-    .hero {
-      grid-template-columns: 1.4fr .8fr;
-      border-radius: 38px;
-      padding: 28px;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(255, 250, 244, 0.9), rgba(249, 240, 230, 0.94)),
-        linear-gradient(120deg, rgba(79, 47, 75, 0.08), rgba(140, 161, 143, 0.06));
-    }
-    .grid-2 { grid-template-columns: .95fr 1.05fr; }
-    .grid-2-even { grid-template-columns: repeat(2, 1fr); }
-    .final { grid-template-columns: 1.2fr .7fr; }
-    .visual-split { grid-template-columns: 1fr 1fr; }
-    .eyebrow, .kicker {
-      font-family: "Space Grotesk", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--plum);
-      font-size: 12px;
-      font-weight: 700;
-    }
-    h1, h2, h3 {
-      margin: 0;
-      font-family: "Fraunces", serif;
-      line-height: 1;
-    }
-    h1 { font-size: clamp(44px, 7vw, 88px); letter-spacing: -.04em; }
-    h2 { font-size: clamp(32px, 4vw, 56px); letter-spacing: -.03em; }
-    h3 { font-size: clamp(22px, 2.4vw, 28px); }
-    p { margin: 0; line-height: 1.7; color: var(--muted); }
-    .hero-copy, .hero-panel, .card, .cta, .section-head, .visual-stack { display: grid; gap: 16px; }
-    .hero-lead { color: var(--ink); font-size: 1.2rem; font-weight: 600; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 20px;
-      border-radius: 999px;
-    }
-    .btn-primary { background: linear-gradient(135deg, var(--plum-deep), var(--plum)); color: #fff7ef; }
-    .btn-secondary { border: 1px solid rgba(79, 47, 75, 0.12); background: rgba(255, 250, 244, 0.78); }
-    .pills {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+
+    .nav {
       display: flex;
+      justify-content: center;
+      gap: 22px;
       flex-wrap: wrap;
-      gap: 10px;
     }
-    .pills li, .audience-pill {
-      display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 999px;
-      border: 1px solid rgba(79, 47, 75, 0.12); color: var(--plum); background: rgba(255, 250, 244, 0.7);
+
+    .nav a,
+    .footer-nav a,
+    .button {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
     }
-    .hero-panel {
-      border-radius: 28px;
-      padding: 22px;
-      background: linear-gradient(180deg, rgba(52, 29, 54, 0.96), rgba(84, 57, 83, 0.94));
-      color: #fff9f4;
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 0.5px solid var(--forest);
     }
-    .hero-panel p, .hero-panel li { color: rgba(255, 249, 244, 0.86); }
-    .hero-panel ul, .card ul { margin: 0; padding-left: 18px; display: grid; gap: 10px; }
-    section { margin-top: 28px; }
-    .card, .cta { border-radius: 28px; padding: 24px; }
-    .offer-grid, .pillar-grid, .program-grid, .format-list, .audience-grid, .proof-grid, .clip-grid { display: grid; gap: 16px; }
-    .offer-grid, .program-grid { grid-template-columns: repeat(2, 1fr); }
-    .pillar-grid { grid-template-columns: 1fr; }
-    .format-list, .audience-grid { grid-template-columns: repeat(2, 1fr); }
-    .proof-grid, .clip-grid { grid-template-columns: repeat(3, 1fr); }
-    .program-audience { color: var(--plum); font-weight: 700; font-size: .96rem; }
-    .proof-stat { color: var(--plum); font-family: "Fraunces", serif; font-size: 2.1rem; line-height: 1; }
-    .image-mock {
+
+    .button-primary {
+      background: var(--forest);
+      color: var(--paper);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--forest);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      border-bottom: 0.5px solid var(--line);
+    }
+
+    .hero-copy,
+    .hero-visual {
+      min-height: 760px;
+      padding: 56px 0 0;
+    }
+
+    .hero-copy {
+      padding-right: 42px;
+    }
+
+    .hero-label,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .hero-label::before,
+    .section-label::before {
+      content: "";
+      width: 44px;
+      height: 0.5px;
+      background: var(--gold);
+    }
+
+    .display-name {
+      margin: 20px 0 8px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(4.4rem, 9vw, 7.3rem);
+      line-height: 0.9;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+    }
+
+    .display-name em {
+      color: var(--forest);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-tagline,
+    .quote-block {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      line-height: 1.1;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--forest);
+    }
+
+    .hero-body,
+    .body-copy,
+    .program-card p,
+    .clip-card p,
+    .topic-list li,
+    .contact-row,
+    .form-panel label,
+    .footer-note {
+      font-size: 0.95rem;
+      line-height: 1.78;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .hero-visual {
       position: relative;
+      background: var(--forest);
       overflow: hidden;
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at top left, rgba(212, 141, 104, 0.26), transparent 28%),
-        linear-gradient(135deg, rgba(255, 250, 244, 0.98), rgba(237, 228, 215, 0.92));
-      min-height: 320px;
     }
-    .image-mock::before {
+
+    .hero-visual::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(120deg, rgba(79, 47, 75, 0.08), transparent 32%),
-        radial-gradient(circle at 80% 24%, rgba(140, 161, 143, 0.22), transparent 24%);
-      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(249, 246, 240, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249, 246, 240, 0.06) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.4;
     }
-    .image-mock::after {
-      content: "";
+
+    .headshot-placeholder {
       position: absolute;
-      right: -10%;
-      bottom: -18%;
-      width: 240px;
-      height: 240px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(79, 47, 75, 0.14), transparent 62%);
+      inset: 18% 14% auto 14%;
+      text-align: center;
+      color: rgba(249, 246, 240, 0.88);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.2rem;
+      font-style: italic;
+      font-weight: 300;
     }
-    .image-mock-inner {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: grid;
-      align-content: end;
-      gap: 10px;
-      padding: 22px;
-    }
-    .image-label {
-      color: var(--plum);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-    .image-title {
-      font-family: "Fraunces", serif;
-      font-size: 1.8rem;
-      line-height: 1;
-    }
-    .image-copy {
-      max-width: 22rem;
-    }
-    .portrait-mock {
-      min-height: 520px;
-      background:
-        linear-gradient(180deg, rgba(255, 250, 244, 0.86), rgba(231, 220, 207, 0.98)),
-        radial-gradient(circle at 70% 22%, rgba(140, 161, 143, 0.18), transparent 20%);
-    }
-    .portrait-silhouette,
-    .stage-silhouette,
-    .workshop-silhouette {
-      position: absolute;
-      inset: auto;
-      border-radius: 999px 999px 28px 28px;
-      background: linear-gradient(180deg, rgba(79, 47, 75, 0.16), rgba(79, 47, 75, 0.34));
-      filter: blur(.2px);
-    }
-    .portrait-silhouette {
-      width: 240px;
-      height: 340px;
-      right: 8%;
-      bottom: 0;
-    }
-    .portrait-silhouette::before {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 999px;
-      top: -58px;
-      left: 60px;
-      background: rgba(79, 47, 75, 0.28);
-    }
-    .stage-mock,
-    .workshop-mock {
-      min-height: 360px;
-    }
-    .stage-silhouette {
-      width: 180px;
-      height: 250px;
-      left: 8%;
-      bottom: 0;
-    }
-    .stage-silhouette::before {
-      content: "";
-      position: absolute;
-      width: 88px;
-      height: 88px;
-      border-radius: 999px;
-      top: -42px;
-      left: 44px;
-      background: rgba(79, 47, 75, 0.3);
-    }
-    .stage-audience {
+
+    .credential-stack {
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      height: 76px;
-      background:
-        radial-gradient(circle at 8% 20%, rgba(27, 24, 32, 0.22) 0 10px, transparent 11px),
-        radial-gradient(circle at 20% 50%, rgba(27, 24, 32, 0.2) 0 10px, transparent 11px),
-        radial-gradient(circle at 34% 32%, rgba(27, 24, 32, 0.18) 0 11px, transparent 12px),
-        radial-gradient(circle at 48% 55%, rgba(27, 24, 32, 0.24) 0 10px, transparent 11px),
-        radial-gradient(circle at 62% 30%, rgba(27, 24, 32, 0.18) 0 10px, transparent 11px),
-        radial-gradient(circle at 76% 50%, rgba(27, 24, 32, 0.22) 0 10px, transparent 11px),
-        radial-gradient(circle at 90% 34%, rgba(27, 24, 32, 0.18) 0 10px, transparent 11px);
-      opacity: .85;
+      display: grid;
+      gap: 0;
     }
-    .workshop-silhouette {
-      width: 220px;
-      height: 210px;
-      left: 10%;
-      bottom: 0;
-      border-radius: 24px;
+
+    .credential-card {
+      display: grid;
+      gap: 4px;
+      padding: 16px 22px;
+      border-left: 3px solid var(--gold);
+      border-top: 0.5px solid rgba(249, 246, 240, 0.12);
+      background: var(--panel-dark);
     }
-    .workshop-silhouette::before,
-    .workshop-silhouette::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      background: rgba(79, 47, 75, 0.28);
+
+    .credential-card span {
+      color: rgba(249, 246, 240, 0.66);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
     }
-    .workshop-silhouette::before {
-      width: 72px;
-      height: 72px;
-      top: -36px;
-      left: 18px;
+
+    .credential-card strong {
+      color: var(--paper);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.28rem;
+      font-weight: 400;
     }
-    .workshop-silhouette::after {
-      width: 72px;
-      height: 72px;
-      top: -36px;
-      right: 18px;
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 0.5px solid var(--line);
     }
-    .workshop-board {
-      position: absolute;
-      right: 8%;
-      top: 16%;
-      width: 180px;
-      height: 120px;
-      border-radius: 18px;
-      border: 1px solid rgba(79, 47, 75, 0.14);
-      background: rgba(255, 250, 244, 0.66);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+
+    .stat-cell {
+      display: grid;
+      gap: 6px;
+      padding: 26px 18px 22px;
+      border-right: 0.5px solid var(--line-soft);
+      text-align: center;
     }
-    .workshop-board::before {
-      content: "";
-      position: absolute;
-      inset: 16px;
-      background:
-        linear-gradient(rgba(79, 47, 75, 0.16), rgba(79, 47, 75, 0.16)) 0 0 / 100% 2px no-repeat,
-        linear-gradient(rgba(79, 47, 75, 0.12), rgba(79, 47, 75, 0.12)) 0 26px / 82% 2px no-repeat,
-        linear-gradient(rgba(79, 47, 75, 0.12), rgba(79, 47, 75, 0.12)) 0 52px / 68% 2px no-repeat;
+
+    .stat-cell:last-child {
+      border-right: 0;
     }
-    @media (max-width: 1040px) {
-      .hero, .grid-2, .grid-2-even, .final, .offer-grid, .program-grid, .proof-grid, .clip-grid, .visual-split { grid-template-columns: 1fr; }
+
+    .stat-number {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.5rem;
+      line-height: 1;
+      font-weight: 300;
+      color: var(--forest);
     }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .section {
+      padding: 46px 0 52px;
+      border-bottom: 0.5px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-header h2,
+    .about-copy h2,
+    .contact-copy h2 {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 0.96;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+    }
+
+    .section-header h2 em,
+    .about-copy h2 em,
+    .contact-copy h2 em {
+      color: var(--forest);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .about-grid,
+    .speaking-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 18px;
+    }
+
+    .pillar-list {
+      display: grid;
+      gap: 0;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .pillar-row {
+      display: grid;
+      gap: 8px;
+      padding: 18px 0;
+      border-bottom: 0.5px solid var(--line-soft);
+    }
+
+    .pillar-row strong,
+    .program-card h3,
+    .clip-card h3,
+    .format-cell h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.65rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 0.5px solid var(--line);
+      border-left: 0.5px solid var(--line);
+    }
+
+    .program-card {
+      display: grid;
+      gap: 14px;
+      min-height: 270px;
+      padding: 22px 20px 24px;
+      border-right: 0.5px solid var(--line);
+      border-bottom: 0.5px solid var(--line);
+    }
+
+    .program-number {
+      color: var(--gold);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .audience-tag {
+      color: var(--forest);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .quote-break {
+      padding: 60px 32px;
+      background: var(--forest);
+      text-align: center;
+      border-bottom: 0.5px solid rgba(249, 246, 240, 0.14);
+    }
+
+    .quote-block {
+      margin: 0 auto;
+      max-width: 900px;
+      color: var(--paper);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    }
+
+    .podcast-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr 1fr;
+      gap: 0;
+      border-top: 0.5px solid var(--line);
+      border-left: 0.5px solid var(--line);
+    }
+
+    .podcast-stat,
+    .clip-card {
+      min-height: 300px;
+      padding: 22px 20px 24px;
+      border-right: 0.5px solid var(--line);
+      border-bottom: 0.5px solid var(--line);
+    }
+
+    .podcast-stat {
+      display: grid;
+      align-content: start;
+      gap: 18px;
+    }
+
+    .podcast-stat-number {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 4.5rem;
+      line-height: 0.9;
+      font-weight: 300;
+      color: var(--forest);
+    }
+
+    .podcast-stat-number.gold {
+      color: var(--gold);
+    }
+
+    .clip-card {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .clip-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .clip-link {
+      color: var(--forest);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .topic-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 0.5px solid var(--line);
+      border-left: 0.5px solid var(--line);
+    }
+
+    .format-cell {
+      display: grid;
+      gap: 10px;
+      min-height: 170px;
+      padding: 18px 18px 20px;
+      border-right: 0.5px solid var(--line);
+      border-bottom: 0.5px solid var(--line);
+    }
+
+    .contact-copy {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-rows {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-row strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .form-panel {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      border: 0.5px solid var(--line);
+    }
+
+    .form-panel input,
+    .form-panel textarea {
+      width: 100%;
+      border: 0.5px solid var(--line);
+      background: transparent;
+      padding: 14px 14px;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    .form-panel textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+      min-height: 92px;
+      background: #13110f;
+      color: rgba(249, 246, 240, 0.8);
+      padding: 0 24px;
+    }
+
+    .footer-brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--paper);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .about-grid,
+      .speaking-grid,
+      .contact-grid,
+      .podcast-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar,
+      .program-grid,
+      .format-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .topbar,
+      .footer {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+
+      .nav,
+      .footer-nav {
+        justify-content: start;
+      }
+    }
+
     @media (max-width: 720px) {
-      .topbar { flex-direction: column; align-items: start; }
-      .format-list, .audience-grid { grid-template-columns: 1fr; }
-      .btn { width: 100%; }
-      .hero { padding: 20px; border-radius: 28px; }
-      .card, .cta { border-radius: 24px; }
+      .page-shell {
+        width: min(100% - 24px, 1280px);
+      }
+
+      .hero-copy,
+      .hero-visual {
+        min-height: auto;
+        padding-top: 34px;
+      }
+
+      .hero-copy {
+        padding-right: 0;
+      }
+
+      .display-name {
+        font-size: clamp(3.2rem, 16vw, 5rem);
+      }
+
+      .stats-bar,
+      .program-grid,
+      .format-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .podcast-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions,
+      .clip-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="page-shell">
     <header class="topbar">
-      <div class="brand">
-        <div class="mark">AG</div>
-        <div>
-          <strong>Ashwarya Gupta</strong>
-          <span>Human insight for AI, leadership, and change.</span>
-        </div>
-      </div>
+      <div class="brand-mark">AG</div>
       <nav class="nav">
         <a href="#about">About</a>
         <a href="#programs">Programs</a>
-        <a href="#media">Media</a>
+        <a href="#podcast">Media</a>
         <a href="#speaking">Speaking</a>
-        <a href="#organisations">Organisations</a>
         <a href="#contact">Contact</a>
       </nav>
+      <a class="button button-primary" href="#contact">Enquire</a>
     </header>
 
-    <section class="hero" id="hero">
+    <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">AI transformation leader, psychology-led facilitator, and speaker</div>
-        <h1>Ashwarya Gupta</h1>
-        <div class="hero-lead">Helping leaders and organisations adopt AI, lead change, and build more human, resilient cultures.</div>
-        <p>Ashwarya Gupta brings together 16+ years of global experience across innovation, product strategy, and enterprise systems with a deep interest in psychology and human behaviour. He helps organisations navigate the real challenge of transformation: not just the technology, but the people, trust, communication, and culture required to make change work.</p>
-        <div class="buttons">
-          <a class="btn btn-primary" href="#contact">Book a Discovery Call</a>
-          <a class="btn btn-secondary" href="#programs">Explore Programs</a>
+        <div class="hero-label fade-up delay-1">AI Transformation Leader</div>
+        <h1 class="display-name fade-up delay-2">Ashwarya<br><em>Gupta</em></h1>
+        <div class="hero-tagline fade-up delay-3">Human insight for AI, leadership, and change.</div>
+        <p class="hero-body fade-up delay-4">Ashwarya Gupta brings together enterprise AI deployment, innovation leadership, and a long-standing interest in psychology to help organisations adopt AI, lead change, and build more human, resilient cultures.</p>
+        <div class="hero-actions fade-up delay-4">
+          <a class="button button-primary" href="#contact">Book a Discovery Call</a>
+          <a class="button button-secondary" href="#programs">Explore Programs</a>
         </div>
-        <ul class="pills">
-          <li>AI Solutions @ J.P. Morgan</li>
-          <li>16+ Years Global Experience</li>
-          <li>Innovation Award Winner</li>
-          <li>Host of Thinking Psychologist</li>
-        </ul>
       </div>
-      <aside class="hero-panel">
-        <div class="kicker">Core positioning</div>
-        <h3>Where enterprise AI meets human insight.</h3>
-        <p>Most organisations do not struggle only with technology. They struggle with adoption, alignment, fear, communication, and the behavioural friction that comes with change. Ashwarya works at that intersection.</p>
-        <ul>
-          <li>AI transformation and leadership readiness</li>
-          <li>Communication, EQ, and trust-building</li>
-          <li>Culture change and human-centred adoption</li>
-        </ul>
+      <aside class="hero-visual">
+        <div class="headshot-placeholder">Editorial headshot placeholder</div>
+        <div class="credential-stack">
+          <article class="credential-card">
+            <span>Current Role</span>
+            <strong>AI Solutions @ J.P. Morgan</strong>
+          </article>
+          <article class="credential-card">
+            <span>Experience</span>
+            <strong>16+ Years Global Innovation Work</strong>
+          </article>
+          <article class="credential-card">
+            <span>Platform</span>
+            <strong>Host of Thinking Psychologist</strong>
+          </article>
+        </div>
       </aside>
     </section>
 
-    <section class="visual-split">
-      <article class="image-mock portrait-mock">
-        <div class="portrait-silhouette"></div>
-        <div class="image-mock-inner">
-          <div class="image-label">Hero Portrait Placeholder</div>
-          <div class="image-title">Replace with your strongest editorial headshot.</div>
-          <p class="image-copy">Best final image: direct eye contact, premium styling, soft neutral background, speaker-level confidence.</p>
+    <section class="stats-bar">
+      <article class="stat-cell">
+        <div class="stat-number">16+</div>
+        <div class="stat-label">Years Experience</div>
+      </article>
+      <article class="stat-cell">
+        <div class="stat-number">15</div>
+        <div class="stat-label">Podcast Episodes</div>
+      </article>
+      <article class="stat-cell">
+        <div class="stat-number">2K+</div>
+        <div class="stat-label">LinkedIn Followers</div>
+      </article>
+      <article class="stat-cell">
+        <div class="stat-number">AI</div>
+        <div class="stat-label">Enterprise to Human Lens</div>
+      </article>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-header">
+        <div class="section-label">About</div>
+        <h2>A rare combination of enterprise credibility and <em>behavioural depth</em>.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="body-copy">Ashwarya Gupta is an AI transformation leader, facilitator, speaker, and host of the Thinking Psychologist podcast. With 16+ years of global experience spanning innovation, product strategy, automation, and enterprise systems, he has built his career at the intersection of technology, business value, and human behaviour.</p>
+          <p class="body-copy">His current work focuses on deploying AI solutions in complex enterprise environments, with particular emphasis on governance, operational architecture, and safe adoption at scale. Alongside that, his long-standing interest in psychology shapes the way he thinks about leadership, communication, change, and culture.</p>
+          <p class="body-copy">What makes his perspective distinctive is that he can speak credibly to both systems and psychology: enterprise AI adoption, human resistance, communication under pressure, and the leadership habits that help transformation hold in the real world.</p>
         </div>
-      </article>
-      <div class="visual-stack">
-        <article class="image-mock stage-mock">
-          <div class="stage-silhouette"></div>
-          <div class="stage-audience"></div>
-          <div class="image-mock-inner">
-            <div class="image-label">Speaking Placeholder</div>
-            <div class="image-title">Auditorium / keynote image</div>
-            <p class="image-copy">This is the visual proof that instantly tells buyers you belong on stage.</p>
+        <div class="pillar-list">
+          <div class="pillar-row">
+            <strong>Enterprise-grounded</strong>
+            <div class="body-copy">Currently leading AI solutions in a high-stakes, regulated environment where trust, governance, and operational clarity matter.</div>
           </div>
-        </article>
-        <article class="image-mock workshop-mock">
-          <div class="workshop-silhouette"></div>
-          <div class="workshop-board"></div>
-          <div class="image-mock-inner">
-            <div class="image-label">Workshop Placeholder</div>
-            <div class="image-title">Facilitation image</div>
-            <p class="image-copy">Use this for a coaching, workshop, or group-learning photograph with participants visible.</p>
+          <div class="pillar-row">
+            <strong>Psychology-led</strong>
+            <div class="body-copy">Grounded in a long-standing interest in human behaviour, self-awareness, communication, and how people actually adapt to change.</div>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="grid-2" id="offerings">
-      <div class="section-head">
-        <div class="eyebrow">What I Do</div>
-        <h2>Helping organisations move from innovation talk to practical, people-ready execution.</h2>
-        <p>Ashwarya helps leaders and teams navigate AI transformation with greater clarity and trust, strengthen communication and emotional intelligence at work, build cultures of ownership and resilience, and move beyond proofs of concept toward meaningful organisational change.</p>
-      </div>
-      <div class="offer-grid">
-        <article class="card">
-          <div class="kicker">AI Leadership and Transformation</div>
-          <p>For leaders and teams navigating enterprise AI, change, and the human side of adoption.</p>
-          <ul><li>AI adoption strategy</li><li>Risk-aware transformation</li><li>Enterprise agency</li></ul>
-        </article>
-        <article class="card">
-          <div class="kicker">Communication and Emotional Intelligence</div>
-          <p>For managers, teams, and emerging leaders who need stronger conversations, better trust, and more effective collaboration.</p>
-          <ul><li>Difficult conversations</li><li>Feedback culture</li><li>Trust and collaboration</li></ul>
-        </article>
-        <article class="card">
-          <div class="kicker">Culture and Change Facilitation</div>
-          <p>For organisations building healthier cultures during growth, restructuring, digital transformation, or operating model shifts.</p>
-          <ul><li>Human-centred change</li><li>Behaviour change</li><li>Culture shift</li></ul>
-        </article>
-        <article class="card">
-          <div class="kicker">Women in Leadership</div>
-          <p>For high-potential women leaders building voice, presence, confidence, and influence.</p>
-          <ul><li>Voice and visibility</li><li>Executive presence</li><li>Confidence and influence</li></ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="grid-2" id="about">
-      <article class="card">
-        <div class="eyebrow">About Ashwarya</div>
-        <h2>A rare combination of enterprise credibility and behavioural depth.</h2>
-        <p>Ashwarya Gupta is an AI transformation leader, facilitator, speaker, and host of the Thinking Psychologist podcast. With 16+ years of global experience spanning innovation, product strategy, automation, and enterprise systems, he has built his career at the intersection of technology, business value, and human behaviour.</p>
-        <p>His current work focuses on deploying AI solutions in complex enterprise environments, with particular emphasis on governance, operational architecture, and safe adoption at scale. Alongside that, his long-standing interest in psychology shapes the way he thinks about leadership, communication, change, and culture.</p>
-      </article>
-      <div class="pillar-grid">
-        <article class="card"><div class="kicker">Enterprise-grounded</div><p>Currently leading AI Solutions for Collateral and Servicing at J.P. Morgan, Ashwarya works on operationalising AI in high-stakes enterprise environments.</p></article>
-        <article class="card"><div class="kicker">Psychology-led</div><p>His long-standing interest in psychology and human behaviour shapes the way he thinks about leadership, communication, adoption, and culture.</p></article>
-        <article class="card"><div class="kicker">Transformation-focused</div><p>He helps organisations move beyond innovation theatre into practical, people-ready execution that can hold under real-world pressure.</p></article>
-      </div>
-    </section>
-
-    <section class="grid-2-even">
-      <article class="card">
-        <div class="eyebrow">Why This Matters</div>
-        <h2>Most AI speakers do not understand behaviour. Most leadership trainers have not built production-grade AI systems.</h2>
-        <p>Ashwarya's work is especially relevant for organisations that want to move beyond AI hype and build the mindset, structures, and human readiness required for meaningful transformation.</p>
-      </article>
-      <article class="card">
-        <div class="eyebrow">Outcomes</div>
-        <ul>
-          <li>Leaders with stronger self-awareness and judgment</li>
-          <li>Healthier, clearer communication across teams</li>
-          <li>Greater readiness for AI-enabled change</li>
-          <li>More thoughtful adoption of new technology</li>
-          <li>Stronger cultures of trust, accountability, and ownership</li>
-          <li>Workshops that are strategic, grounded, and deeply human</li>
-        </ul>
-      </article>
-    </section>
-
-    <section id="media">
-      <div class="section-head" style="margin-bottom:16px">
-        <div class="eyebrow">Media and Podcast</div>
-        <h2>Public conversations that build real authority.</h2>
-        <p>The Thinking Psychologist podcast gives the brand genuine depth. It shows Ashwarya not just as a trainer, but as someone who has hosted substantive conversations on innovation, psychology, service design, resilience, and the human mind.</p>
-      </div>
-      <div class="proof-grid">
-        <article class="card">
-          <div class="proof-stat">15</div>
-          <div class="kicker">Podcast Episodes</div>
-          <p>A visible archive of long-form conversations across psychology, innovation, design, and personal growth.</p>
-        </article>
-        <article class="card">
-          <div class="proof-stat">Global</div>
-          <div class="kicker">Guest Network</div>
-          <p>Guests include psychologists, professors, coaches, design leaders, and innovation experts from multiple countries.</p>
-        </article>
-        <article class="card">
-          <div class="proof-stat">Cross-Disciplinary</div>
-          <div class="kicker">Trust Signal</div>
-          <p>This strengthens your positioning across AI, leadership, behavioural insight, and human-centred transformation.</p>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head" style="margin-bottom:16px">
-        <div class="eyebrow">Featured Conversations</div>
-        <h2>The best public conversations to lead with now.</h2>
-        <p>I’ve selected the episodes that best support your current brand: innovation, psychology, and human-centred design.</p>
-      </div>
-      <div class="clip-grid">
-        <article class="card">
-          <div class="kicker">Innovation and Leadership</div>
-          <h3>#15 An Innovators Dilemma</h3>
-          <p>This is the strongest fit for your current positioning because it signals depth around innovation, trade-offs, and leadership under uncertainty.</p>
-          <p><strong>Best use on the site:</strong> proof that you can speak intelligently about innovation beyond buzzwords.</p>
-          <div class="buttons">
-            <a class="btn btn-secondary" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube Channel</a>
-            <a class="btn btn-secondary" href="https://podcasts.apple.com/in/podcast/thinking-psychologist/id1517047161">Apple Podcasts</a>
+          <div class="pillar-row">
+            <strong>Transformation-focused</strong>
+            <div class="body-copy">Helps organisations move beyond innovation theatre into practical, people-ready execution that can hold under pressure.</div>
           </div>
-        </article>
-        <article class="card">
-          <div class="kicker">Psychology and Self-Awareness</div>
-          <h3>#14 Role of Genes in Defining Success / Failure</h3>
-          <p>This adds intellectual and behavioural depth to the brand and shows Ashwarya in dialogue with serious academic voices on motivation and self-understanding.</p>
-          <p><strong>Best use on the site:</strong> proof of substance, curiosity, and psychological credibility.</p>
-          <div class="buttons">
-            <a class="btn btn-secondary" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube Channel</a>
-            <a class="btn btn-secondary" href="https://podimo.com/shows/thinking-psychologist">Podimo</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="kicker">Human-Centred Design</div>
-          <h3>#13 User Centric Service Design</h3>
-          <p>This is excellent evidence that your thinking bridges psychology, business, and product strategy, which strongly supports your transformation story.</p>
-          <p><strong>Best use on the site:</strong> proof that you understand not just people, but systems, design, and adoption.</p>
-          <div class="buttons">
-            <a class="btn btn-secondary" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube Channel</a>
-            <a class="btn btn-secondary" href="https://www.thinkingpsychologist.com/search-results">Podcast Archive</a>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section id="programs">
-      <div class="section-head" style="margin-bottom:16px">
-        <div class="eyebrow">Programs</div>
-        <h2>Programs designed for the realities of leadership today.</h2>
-        <p>Sessions can be adapted for executive teams, managers, L&amp;D cohorts, universities, and institutional audiences.</p>
+    <section class="section" id="programs">
+      <div class="section-header">
+        <div class="section-label">Programs</div>
+        <h2>Programs designed for the realities of <em>leadership today</em>.</h2>
       </div>
       <div class="program-grid">
-        <article class="card"><h3>Leading in the Era of Enterprise Agency</h3><div class="program-audience">Senior leaders, transformation teams, AI leaders, operations heads, and innovation teams</div><p>How leadership changes when organisations move from automation and copilots toward agentic systems, new operating models, and risk-aware AI deployment.</p></article>
-        <article class="card"><h3>Emotional Intelligence at Work</h3><div class="program-audience">Managers, emerging leaders, team leads, and cross-functional teams</div><p>Self-awareness, emotional regulation, empathy, listening, trust, and the impact of emotional habits on leadership and team performance.</p></article>
-        <article class="card"><h3>Communicating with Clarity and Influence</h3><div class="program-audience">Leadership teams, managers, business partners, and high-potential professionals</div><p>How to communicate with greater confidence, clarity, and credibility across difficult conversations, stakeholder settings, and moments of pressure.</p></article>
-        <article class="card"><h3>Human-Centred AI Adoption in Regulated Organisations</h3><div class="program-audience">Enterprise teams, governance leaders, risk teams, AI program teams, and leadership groups</div><p>The cultural and behavioural side of AI adoption in environments where trust, auditability, and safety matter.</p></article>
-        <article class="card"><h3>Building Cultures of Trust and Ownership</h3><div class="program-audience">Leadership teams, HR/L&amp;D teams, and teams in transition</div><p>How culture is shaped through communication, accountability, psychological safety, and everyday leadership habits.</p></article>
-        <article class="card"><h3>Women in Leadership: Voice, Presence, and Power</h3><div class="program-audience">Women leaders, high-potential cohorts, and leadership development programs</div><p>Voice, confidence, boundaries, executive presence, self-trust, communication, and influence.</p></article>
+        <article class="program-card">
+          <div class="program-number">01</div>
+          <h3>Leading in the Era of Enterprise Agency</h3>
+          <p>How leadership changes when organisations move from automation and copilots toward agentic systems, new operating models, and risk-aware AI deployment.</p>
+          <div class="audience-tag">Senior Leaders</div>
+        </article>
+        <article class="program-card">
+          <div class="program-number">02</div>
+          <h3>Emotional Intelligence at Work</h3>
+          <p>Self-awareness, emotional regulation, empathy, listening, trust, and the impact of emotional habits on leadership and team performance.</p>
+          <div class="audience-tag">Managers and Teams</div>
+        </article>
+        <article class="program-card">
+          <div class="program-number">03</div>
+          <h3>Communicating with Clarity and Influence</h3>
+          <p>How to communicate with greater confidence, clarity, and credibility across difficult conversations, stakeholder settings, and moments of pressure.</p>
+          <div class="audience-tag">High-Potential Talent</div>
+        </article>
+        <article class="program-card">
+          <div class="program-number">04</div>
+          <h3>Human-Centred AI Adoption</h3>
+          <p>The cultural and behavioural side of AI adoption in environments where trust, auditability, and safety matter.</p>
+          <div class="audience-tag">AI and Transformation Teams</div>
+        </article>
+        <article class="program-card">
+          <div class="program-number">05</div>
+          <h3>Building Cultures of Trust and Ownership</h3>
+          <p>How culture is shaped through communication, accountability, psychological safety, and everyday leadership habits.</p>
+          <div class="audience-tag">HR and L&amp;D</div>
+        </article>
+        <article class="program-card">
+          <div class="program-number">06</div>
+          <h3>Women's Leadership Cohorts</h3>
+          <p>Facilitated conversations and learning journeys for teams and communities focused on confidence, communication, visibility, and influence.</p>
+          <div class="audience-tag">Leadership Communities</div>
+        </article>
       </div>
     </section>
 
-    <section class="grid-2-even">
-      <article class="card">
-        <div class="eyebrow">Formats</div>
-        <div class="format-list">
-          <div class="card"><h3>Keynotes</h3><p>For conferences, leadership events, and internal forums.</p></div>
-          <div class="card"><h3>Workshops</h3><p>Interactive sessions for teams, managers, and leadership groups.</p></div>
-          <div class="card"><h3>Offsites</h3><p>Facilitated strategy and reflection experiences for leaders in transition.</p></div>
-          <div class="card"><h3>Cohort Programs</h3><p>Multi-session journeys for deeper capability building.</p></div>
-          <div class="card"><h3>Custom Interventions</h3><p>Bespoke programs tailored to your organisation's context.</p></div>
+    <section class="quote-break">
+      <blockquote class="quote-block">“The real work of AI transformation is not only technological. It is cultural, behavioural, and deeply human.”</blockquote>
+    </section>
+
+    <section class="section" id="podcast">
+      <div class="section-header">
+        <div class="section-label">Podcast</div>
+        <h2>Public conversations that build <em>real authority</em>.</h2>
+      </div>
+      <div class="podcast-grid">
+        <article class="podcast-stat">
+          <div class="podcast-stat-number">15</div>
+          <div class="podcast-stat-number gold">EP</div>
+          <div class="body-copy">Thinking Psychologist gives the brand public depth through long-form conversations on innovation, psychology, design, resilience, and the human mind.</div>
+        </article>
+        <article class="clip-card">
+          <h3>#15 An Innovators Dilemma</h3>
+          <p>This is one of the strongest public-facing conversations for the current brand because it directly supports innovation, leadership, and decision-making under uncertainty.</p>
+          <div class="clip-links">
+            <a class="clip-link" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube</a>
+            <a class="clip-link" href="https://podcasts.apple.com/in/podcast/thinking-psychologist/id1517047161">Apple Podcasts</a>
+          </div>
+        </article>
+        <article class="clip-card">
+          <h3>#14 Genes, Success, and Failure</h3>
+          <p>A strong psychology-forward episode that adds intellectual depth, self-awareness, and behavioural credibility to the public brand.</p>
+          <div class="clip-links">
+            <a class="clip-link" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube</a>
+            <a class="clip-link" href="https://podimo.com/shows/thinking-psychologist">Podimo</a>
+          </div>
+        </article>
+        <article class="clip-card">
+          <h3>#13 User Centric Service Design</h3>
+          <p>This strongly supports the human-centred transformation story by showing Ashwarya in dialogue about systems, behaviour, design, and user insight.</p>
+          <div class="clip-links">
+            <a class="clip-link" href="https://www.youtube.com/@thinkingpsychologist8896">YouTube</a>
+            <a class="clip-link" href="https://www.thinkingpsychologist.com/search-results">Archive</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="speaking">
+      <div class="section-header">
+        <div class="section-label">Speaking</div>
+        <h2>Talks that combine strategic clarity with <em>psychological depth</em>.</h2>
+      </div>
+      <div class="speaking-grid">
+        <div>
+          <ul class="topic-list">
+            <li>Leading in the Age of Enterprise AI</li>
+            <li>The Human Side of AI Adoption</li>
+            <li>Emotional Intelligence for Modern Leadership</li>
+            <li>Communication, Trust, and Culture in Times of Change</li>
+            <li>Women in Leadership and the Psychology of Presence</li>
+            <li>Innovation, Uncertainty, and Building Resilient Teams</li>
+          </ul>
         </div>
-      </article>
-      <article class="card">
-        <div class="eyebrow">Best Fit Audiences</div>
-        <div class="audience-grid">
-          <span class="audience-pill">Corporate leadership teams</span>
-          <span class="audience-pill">Managers and emerging leaders</span>
-          <span class="audience-pill">HR and L&amp;D teams</span>
-          <span class="audience-pill">Enterprise AI and transformation teams</span>
-          <span class="audience-pill">Universities and educator communities</span>
-          <span class="audience-pill">Women's leadership cohorts</span>
+        <div class="format-grid">
+          <article class="format-cell">
+            <h3>Keynotes</h3>
+            <p>For conferences, leadership events, and internal forums.</p>
+          </article>
+          <article class="format-cell">
+            <h3>Workshops</h3>
+            <p>Interactive sessions for teams, managers, and leadership groups.</p>
+          </article>
+          <article class="format-cell">
+            <h3>Offsites</h3>
+            <p>Facilitated strategy and reflection experiences for leaders in transition.</p>
+          </article>
+          <article class="format-cell">
+            <h3>Cohort Programs</h3>
+            <p>Multi-session journeys for deeper capability building.</p>
+          </article>
         </div>
-      </article>
+      </div>
     </section>
 
-    <section class="grid-2-even" id="speaking">
-      <article class="card">
-        <div class="eyebrow">Speaking</div>
-        <h2>Talks that combine strategic clarity with psychological depth.</h2>
-        <p>Ashwarya speaks on AI, leadership, human behaviour, and the cultural realities of change. His talks are particularly strong in rooms where technology and human systems intersect.</p>
-      </article>
-      <article class="card">
-        <div class="eyebrow">Speaking Topics</div>
-        <ul>
-          <li>Leading in the Age of Enterprise AI</li>
-          <li>The Human Side of AI Adoption</li>
-          <li>Emotional Intelligence for Modern Leadership</li>
-          <li>Communication, Trust, and Culture in Times of Change</li>
-          <li>Women in Leadership and the Psychology of Presence</li>
-          <li>Innovation, Uncertainty, and Building Resilient Teams</li>
-        </ul>
-      </article>
+    <section class="section" id="contact">
+      <div class="section-header">
+        <div class="section-label">Contact</div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-copy">
+          <h2>Bring Ashwarya in for your next <em>leadership conversation</em>.</h2>
+          <p class="body-copy">If you are looking for a keynote speaker, workshop facilitator, or thought partner for leadership, AI adoption, communication, or culture change, Ashwarya brings a perspective that is both strategic and deeply human.</p>
+          <div class="contact-rows">
+            <div class="contact-row"><strong>Email:</strong> hello@thinkingpsychologist.com</div>
+            <div class="contact-row"><strong>LinkedIn:</strong> linkedin.com/in/iknowash</div>
+            <div class="contact-row"><strong>Podcast:</strong> Thinking Psychologist</div>
+          </div>
+        </div>
+        <form class="form-panel">
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name" />
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="Your email" />
+          <label for="message">What are you looking for?</label>
+          <textarea id="message" placeholder="Tell me about your audience, challenge, or event."></textarea>
+          <button class="button button-primary" type="button">Send Enquiry</button>
+        </form>
+      </div>
     </section>
 
-    <section class="grid-2-even" id="organisations">
-      <article class="card">
-        <div class="eyebrow">For Organisations</div>
-        <h2>Transformation is never only technical. It is human.</h2>
-        <p>Ashwarya works with organisations that want to adopt AI more thoughtfully, support managers during periods of change, strengthen communication and emotional intelligence, and create healthier cultures of ownership and trust.</p>
-      </article>
-      <article class="card">
-        <div class="eyebrow">Common Needs</div>
-        <ul>
-          <li>Build leadership readiness for AI-enabled transformation</li>
-          <li>Strengthen communication and emotional intelligence across teams</li>
-          <li>Support managers during periods of change</li>
-          <li>Create healthier cultures of ownership and trust</li>
-          <li>Design more human-centred approaches to transformation</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="final" id="contact">
-      <article class="card">
-        <div class="eyebrow">Let's Work Together</div>
-        <h2>Bring Ashwarya in for your next leadership, AI, or culture conversation.</h2>
-        <p>If you are looking for a keynote speaker, workshop facilitator, or thought partner for leadership, AI adoption, communication, or culture change, Ashwarya brings a perspective that is both strategic and deeply human.</p>
-        <ul>
-          <li>Tell me about your audience</li>
-          <li>Share the challenge you are solving</li>
-          <li>Let me know the format you have in mind</li>
-          <li>I'll come back with the best-fit approach</li>
-        </ul>
-      </article>
-      <aside class="cta">
-        <div class="eyebrow">Contact</div>
-        <a class="btn btn-primary" href="mailto:hello@thinkingpsychologist.com">hello@thinkingpsychologist.com</a>
-        <a class="btn btn-secondary" href="https://www.linkedin.com/in/iknowash/">Connect on LinkedIn</a>
-        <p>This CTA can later be replaced with a booking link, enquiry form, WhatsApp button, or downloadable workshop brochure.</p>
-      </aside>
-    </section>
+    <footer class="footer">
+      <div class="footer-brand">Ashwarya Gupta</div>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#podcast">Media</a>
+        <a href="#speaking">Speaking</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-note">© 2026 Ashwarya Gupta</div>
+    </footer>
   </div>
 </body>
 </html>
