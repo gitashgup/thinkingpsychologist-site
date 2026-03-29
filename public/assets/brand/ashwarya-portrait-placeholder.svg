@@ -1,0 +1,17 @@
+<svg width="1200" height="1400" viewBox="0 0 1200 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1400" fill="#1A3A2E"/>
+  <rect x="56" y="56" width="1088" height="1288" stroke="rgba(249,246,240,0.16)" stroke-width="2"/>
+  <path d="M0 220H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M0 520H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M0 820H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M0 1120H1200" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M220 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M520 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M820 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <path d="M1080 0V1400" stroke="rgba(249,246,240,0.08)" stroke-width="1"/>
+  <circle cx="625" cy="420" r="120" fill="#B8892A" fill-opacity="0.34"/>
+  <path d="M440 620C440 510 529.543 420 640 420C750.457 420 840 510 840 620V734C840 844.457 750.457 934 640 934C529.543 934 440 844.457 440 734V620Z" fill="rgba(184,137,42,0.24)"/>
+  <path d="M334 1128C334 968.943 462.943 840 622 840H658C817.057 840 946 968.943 946 1128V1260H334V1128Z" fill="rgba(249,246,240,0.18)"/>
+  <text x="96" y="124" fill="#F9F6F0" fill-opacity="0.72" font-family="Cormorant Garamond, serif" font-size="40" font-style="italic">Editorial portrait placeholder</text>
+  <text x="96" y="1310" fill="#B8892A" font-family="DM Sans, sans-serif" font-size="22" letter-spacing="5">REPLACE WITH PROFESSIONAL HEADSHOT</text>
+</svg>

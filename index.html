@@ -224,15 +224,19 @@
       opacity: 0.4;
     }
 
-    .headshot-placeholder {
+    .hero-image {
       position: absolute;
-      inset: 18% 14% auto 14%;
-      text-align: center;
-      color: rgba(249, 246, 240, 0.88);
-      font-family: "Cormorant Garamond", serif;
-      font-size: 2.2rem;
-      font-style: italic;
-      font-weight: 300;
+      inset: 54px 54px 226px 54px;
+      border: 0.5px solid rgba(249, 246, 240, 0.18);
+      overflow: hidden;
+    }
+
+    .hero-image img,
+    .visual-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .credential-stack {
@@ -272,6 +276,35 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       border-bottom: 0.5px solid var(--line);
+    }
+
+    .visual-story {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      border-bottom: 0.5px solid var(--line);
+    }
+
+    .visual-card {
+      min-height: 420px;
+      border-right: 0.5px solid var(--line);
+    }
+
+    .visual-card:last-child {
+      border-right: 0;
+    }
+
+    .visual-caption {
+      display: grid;
+      gap: 8px;
+      padding: 18px 18px 20px;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .visual-caption strong {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.55rem;
+      line-height: 1;
+      font-weight: 400;
     }
 
     .stat-cell {
@@ -558,6 +591,7 @@
 
     @media (max-width: 1120px) {
       .hero,
+      .visual-story,
       .about-grid,
       .speaking-grid,
       .contact-grid,
@@ -594,6 +628,12 @@
         padding-top: 34px;
       }
 
+      .hero-image {
+        position: relative;
+        inset: auto;
+        margin: 0 0 210px;
+      }
+
       .hero-copy {
         padding-right: 0;
       }
@@ -610,6 +650,10 @@
 
       .podcast-grid {
         grid-template-columns: 1fr;
+      }
+
+      .visual-card {
+        border-right: 0;
       }
 
       .hero-actions,
@@ -646,7 +690,9 @@
         </div>
       </div>
       <aside class="hero-visual">
-        <div class="headshot-placeholder">Editorial headshot placeholder</div>
+        <div class="hero-image">
+          <img src="/public/assets/brand/ashwarya-portrait-placeholder.svg" alt="Editorial portrait placeholder for Ashwarya Gupta" />
+        </div>
         <div class="credential-stack">
           <article class="credential-card">
             <span>Current Role</span>
@@ -684,6 +730,23 @@
       <article class="stat-cell">
         <div class="stat-number">AI</div>
         <div class="stat-label">Enterprise to Human Lens</div>
+      </article>
+    </section>
+
+    <section class="visual-story">
+      <article class="visual-card">
+        <img src="/public/assets/brand/ashwarya-speaking-placeholder.svg" alt="Auditorium keynote placeholder" />
+        <div class="visual-caption">
+          <strong>On stage and in the room</strong>
+          <div class="body-copy">Use this space for a keynote, auditorium, or conference image where Ashwarya is visibly addressing a live audience.</div>
+        </div>
+      </article>
+      <article class="visual-card">
+        <img src="/public/assets/brand/ashwarya-workshop-placeholder.svg" alt="Workshop facilitation placeholder" />
+        <div class="visual-caption">
+          <strong>Facilitating live transformation</strong>
+          <div class="body-copy">This gives the site a second proof layer: not only speaking from stage, but also working closely with teams, leaders, and learning cohorts.</div>
+        </div>
       </article>
     </section>
 

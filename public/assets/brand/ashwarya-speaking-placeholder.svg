@@ -1,0 +1,26 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="980" fill="#1A3A2E"/>
+  <rect x="52" y="52" width="1496" height="876" stroke="rgba(249,246,240,0.14)" stroke-width="2"/>
+  <rect x="0" y="0" width="1600" height="980" fill="url(#grad)"/>
+  <path d="M0 676H1600" stroke="rgba(249,246,240,0.14)" stroke-width="2"/>
+  <path d="M128 0V980" stroke="rgba(249,246,240,0.06)"/>
+  <path d="M448 0V980" stroke="rgba(249,246,240,0.06)"/>
+  <path d="M768 0V980" stroke="rgba(249,246,240,0.06)"/>
+  <path d="M1088 0V980" stroke="rgba(249,246,240,0.06)"/>
+  <path d="M1408 0V980" stroke="rgba(249,246,240,0.06)"/>
+  <rect x="932" y="178" width="380" height="210" stroke="#B8892A" stroke-width="2" fill="rgba(249,246,240,0.06)"/>
+  <path d="M286 636C286 528.304 373.304 441 481 441H491C598.696 441 686 528.304 686 636V738H286V636Z" fill="rgba(249,246,240,0.18)"/>
+  <circle cx="487" cy="367" r="86" fill="rgba(184,137,42,0.42)"/>
+  <rect x="632" y="476" width="24" height="214" fill="#B8892A"/>
+  <circle cx="642" cy="450" r="36" fill="#B8892A"/>
+  <path d="M0 760C160 720 286 714 410 760C532 804 640 836 784 792C926 746 1038 700 1180 736C1322 772 1430 830 1600 794V980H0V760Z" fill="rgba(249,246,240,0.16)"/>
+  <path d="M0 840C134 796 220 796 346 840C472 884 578 916 730 876C880 836 1004 778 1148 812C1290 846 1436 908 1600 880V980H0V840Z" fill="rgba(20,18,16,0.32)"/>
+  <text x="96" y="126" fill="#F9F6F0" fill-opacity="0.72" font-family="Cormorant Garamond, serif" font-size="44" font-style="italic">Auditorium / keynote placeholder</text>
+  <text x="96" y="916" fill="#B8892A" font-family="DM Sans, sans-serif" font-size="22" letter-spacing="5">REPLACE WITH ON-STAGE SPEAKING IMAGE</text>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1600" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A3A2E"/>
+      <stop offset="1" stop-color="#233F34"/>
+    </linearGradient>
+  </defs>
+</svg>
